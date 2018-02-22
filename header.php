@@ -15,8 +15,11 @@
   <?php
   if(isset($_SESSION['username'])) {
   echo('
-    <!-- Log out -->
+    <!-- Profile and Log out -->
     <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="./profile.php">Profile</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="./logout.php">Log Out</a>
       </li>
