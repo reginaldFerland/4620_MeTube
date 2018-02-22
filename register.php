@@ -33,11 +33,19 @@ if(isset($_POST['submit'])) {
 }
 
 ?>
-<form action="register.php" method="post">
-	Username: <input type="text" name="username"> <br>
-	Create Password: <input  type="password" name="passowrd1"> <br>
-	Repeat password: <input type="password" name="passowrd2"> <br>
-	<input name="submit" type="submit" value="Submit">
+<form action="register.php" method="post" style="max-width:200px; margin: 20px" class="mx-auto">
+  <div class="form-group">
+    <input type="text" name="username" placeholder="Username">
+  </div>
+  <div class="form-group">
+    <input  type="password" name="passowrd1" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <input type="password" name="passowrd2" placeholder="Repeat Password">
+  </div>
+  <div class="form-group">
+    <input name="submit" type="submit" value="Submit">
+  </div>
 </form>
 
 <?php
