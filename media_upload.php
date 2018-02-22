@@ -6,6 +6,7 @@ session_start();
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Media Upload</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <?php
     if(!isset($_SESSION['username'])) { header("Location: index.php");}
 

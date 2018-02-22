@@ -15,7 +15,7 @@
 include('header.php');
 ?>
 
-Majority of content
+<p>Majority of content</p>
 
 <!-- Include same footer across website -->
 <?php

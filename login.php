@@ -1,6 +1,8 @@
+<!doctype html>
 <html>
 <head>
 <title>MeTube - Login</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
 <link rel="stylesheet" type="text/css" href="css/default.css" />
