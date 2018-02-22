@@ -1,57 +1,40 @@
 <header>
-<style>
-#outer {
-    width:100%;
-    text-align:center;
-}
-.inner {
-    display:inline-block;
-}
-</style>
 
+<!-- Nav bar -->
+<nav class="navbar navbar-expand navbar-inverse bg-dark">
+  <!-- Logo -->
+  <a class="navbar-brand" href="./">METUBE</a>
 
-<div id="outer">
-<div class="inner">
-<a href='index.php' >Home</a>
-</div>
-<div class="inner">
-<h1> Metube </h1>
-</div>
+  <!-- Search Bar -->
+  <form class="form-inline" action="">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+    <button class="btn btn-success" type="submit">Search</button>
+  </form>
 
-<?php
-if(!isset($_SESSION['username'])) {
-echo('
-<div class="inner">
-<form action="login.php" method="post">
-	
-	<input type="submit" class="button"  VALUE = "Log in" >
-</form>
-</div>
+  <!-- Determine if logged in -->
+  <?php
+  if(isset($_SESSION['username'])) {
+  echo('
+    <!-- Log out -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="./logout.php">Log Out</a>
+      </li>
+    </ul>
+    
+  ');}
+  else {
+  echo(' 
+    <!-- Log in or Register -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="./login.php">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="./register.php">Register</a>
+      </li>
+    </ul>
+  ');} ?>
 
-<div class="inner">
-<form action="register.php" method="post">
-	
-	<input type="submit" class="button"  VALUE = "Register" >
-</form>
-</div>
-');
-}
-
-else {
-echo('
-<div class="inner">
-<form action="logout.php" method="post">
-	
-	<input type="submit" class="button"  VALUE = "Log out" >
-</form>
-</div>
-
-');
-}
-
-?>
-</div>
-
-<hr>
-
+</nav>
 </header>
