@@ -1,1 +1,0 @@
-Will create a cookie to store session ID. When login add session ID to cookie, when page load check for session ID. when logout remove ID.
