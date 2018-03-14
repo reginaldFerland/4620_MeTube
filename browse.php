@@ -52,34 +52,41 @@ echo('<a href="media_upload.php"  style="color:#FF9900;">Upload File</a>'); }
 ?>
     
 <!-- Display media -->
-    <div style="background:#339900;color:#FFFFFF; width:150px;">Uploaded Media</div>
-        <table width="50%" cellpadding="0" cellspacing="0">
+    <div>
                  <!-- Loops through all results -->
                  <?php 
 			while ($result_row = mysql_fetch_row($result)) //filename, username, type, mediaid, path
 			{ 
 				$mediaid = $result_row[3];
+                                $username = $result_row[1];
+                                $type = $result_row[2];
 				$filename = $result_row[0];
 				$filenpath = $result_row[4];
+                                $time_access= $result_row[5];
+                                $time_created = $result_row[6];
+                                $viewcount = $result_row[7];
 		?>
-        	 <tr valign="top">			
-			<td>
-					<?php 
-						echo $mediaid;  //mediaid
-					?>
-			</td>
-                        <td>
-            	            <a href="media.php?id=<?php echo $mediaid;?>" target="_blank"><?php echo $filename;?></a> 
-                        </td>
-                        <td>
+                            <!-- Download -->
             	            <a href="<?php echo $filenpath;?>" target="_blank" onclick="javascript:saveDownload(<?php echo $result_row[4];?>);">Download</a>
-                        </td>
-		</tr>
+
+<div> <!-- Hold row, most viewed -->
+<div class="card text-center" style="width: 18rem;">
+  <a href="media.php?id=<?php echo $mediaid;?>" target="_blank"><img class="card-img-top" src="<?php echo $filenpath; ?>" alt="Card image cap"></a>
+  <div class="card-body">
+    <h5 class="card-title"><?php echo $filename; ?></h5>
+    <p class="card-text">From: <?php echo $username; ?></p>
+    <p class="card-text">Views: <?php echo $viewcount; ?> </p>
+  </div>
+</div>
+           <!-- End loop -->
         	<?php
 			}
 		?>
-	</table>
-   </div>
+
+
+</div>
+
+</div>
 
 </body>
 </html>
