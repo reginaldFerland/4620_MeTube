@@ -1,6 +1,9 @@
 <!doctype html>
 <!-- For login management -->
-<?php session_start(); ?>
+<?php 
+session_save_path("/home/rferlan/public_html/metube/session");
+session_start(); 
+?>
 
 <html>
 <head>

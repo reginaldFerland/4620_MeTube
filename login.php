@@ -12,6 +12,7 @@
 ?>
 
 <?php
+session_save_path("/home/rferlan/public_html/metube/session");
 session_start();
 
 include_once "function.php";
@@ -30,7 +31,7 @@ if(isset($_POST['submit'])) {
 			}
 			else if($check==0){
 				$_SESSION['username']=$_POST['username']; //Set the $_SESSION['username']
-				header('Location: browse.php');
+				header('Location: .');
 			}		
 		}
 }

@@ -19,7 +19,6 @@ include('header.php');
 <?php
 include('browse.php');
 ?>
-<p>Majority of content</p>
 
 <!-- Include same footer across website -->
 <?php

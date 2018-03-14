@@ -11,6 +11,7 @@
 ?>
 
 <?php
+session_save_path("/home/rferlan/public_html/metube/session");
 session_start();
 
 include_once "function.php";
