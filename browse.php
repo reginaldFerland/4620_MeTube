@@ -26,12 +26,8 @@
 
 <body>
 
-<!-- Need link to upload, browse categories -->
+<!-- browse categories -->
 
-<!-- Checks if logged in then links to upload page -->
-<?php if(isset($_SESSION['username'])) { 
-echo('<a href="media_upload.php"  style="color:#FF9900;">Upload File</a>'); } 
-?>
 <div id='upload_result'>
     <?php 
         if(isset($_REQUEST['result']) && $_REQUEST['result']!=0)

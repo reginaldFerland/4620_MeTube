@@ -33,7 +33,6 @@ if(isset($_GET['id'])) {
 		echo "Viewing Picture:";
 		echo $result_row[4];
 		echo "<img src='".$filepath."'/>";
-                echo "<a href=".$filenpath." target='_blank' onclick="javascript:saveDownload($result_row[4]);">Download</a>";
 
 	}
 	else //view movie
@@ -67,6 +66,7 @@ else
 }
 ?>
 
+Needs download option
 
 <?php
     include('footer.php');
