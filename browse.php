@@ -66,8 +66,6 @@ echo('<a href="media_upload.php"  style="color:#FF9900;">Upload File</a>'); }
                                 $time_created = $result_row[6];
                                 $viewcount = $result_row[7];
 		?>
-                            <!-- Download -->
-            	            <a href="<?php echo $filenpath;?>" target="_blank" onclick="javascript:saveDownload(<?php echo $result_row[4];?>);">Download</a>
 
 <div> <!-- Hold row, most viewed -->
 <div class="card text-center" style="width: 18rem;">

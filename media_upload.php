@@ -2,12 +2,12 @@
 session_save_path("/home/rferlan/public_html/metube/session");
 session_start();
 ?>
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Media Upload</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
 <?php
     if(!isset($_SESSION['username'])) { header("Location: index.php");}
 
