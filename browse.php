@@ -48,7 +48,7 @@
 ?>
     
 <!-- Display media -->
-    <div>
+<div class="row">
                  <!-- Loops through all results -->
                  <?php 
 			while ($result_row = mysql_fetch_row($result)) //filename, username, type, mediaid, path
@@ -63,7 +63,7 @@
                                 $viewcount = $result_row[7];
 		?>
 
-<div> <!-- Hold row, most viewed -->
+<div class="col"> 
 <div class="card text-center" style="width: 18rem;">
   <a href="media.php?id=<?php echo $mediaid;?>" target="_blank"><img class="card-img-top" src="<?php echo $filenpath; ?>" alt="Card image cap"></a>
   <div class="card-body">
@@ -72,14 +72,12 @@
     <p class="card-text">Views: <?php echo $viewcount; ?> </p>
   </div>
 </div>
+</div>
 
            <!-- End loop -->
         	<?php
 			}
 		?>
-
-
-</div>
 
 </div>
 
