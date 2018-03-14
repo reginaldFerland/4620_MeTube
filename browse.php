@@ -72,7 +72,6 @@
     <p class="card-text">Views: <?php echo $viewcount; ?> </p>
   </div>
 </div>
-<a href="<?php echo $result_row[4];?>" target="_blank" onclick="javascript:saveDownload(<?php echo $result_row[4];?>);">Download</a>
 
            <!-- End loop -->
         	<?php
