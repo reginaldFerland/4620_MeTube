@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <?php
-	session_start();
 	include_once "function.php";
 ?>
 <html>
@@ -26,14 +25,13 @@
 </head>
 
 <body>
-<?php
-    include('header.php');
-?>
 
-<p>Welcome <?php if(isset($_SESSION['username'])){ echo $_SESSION['username'];} else {echo "Guest";}?></p>
-<?php if(isset($_SESSION['username'])) { echo('
-<a href="media_upload.php"  style="color:#FF9900;">Upload File</a>
-'); } ?>
+<!-- Need link to upload, browse categories -->
+
+<!-- Checks if logged in then links to upload page -->
+<?php if(isset($_SESSION['username'])) { 
+echo('<a href="media_upload.php"  style="color:#FF9900;">Upload File</a>'); } 
+?>
 <div id='upload_result'>
     <?php 
         if(isset($_REQUEST['result']) && $_REQUEST['result']!=0)
@@ -43,6 +41,7 @@
     ?>
 </div>
 <br/><br/>
+<!-- Query media -->
 <?php
 
     $query = "SELECT * from media"; 
@@ -52,9 +51,11 @@
     }
 ?>
     
+<!-- Display media -->
     <div style="background:#339900;color:#FFFFFF; width:150px;">Uploaded Media</div>
         <table width="50%" cellpadding="0" cellspacing="0">
-                 <?php
+                 <!-- Loops through all results -->
+                 <?php 
 			while ($result_row = mysql_fetch_row($result)) //filename, username, type, mediaid, path
 			{ 
 				$mediaid = $result_row[3];
@@ -80,8 +81,5 @@
 	</table>
    </div>
 
-<?php
-    include('footer.php');
-?>
 </body>
 </html>
