@@ -11,19 +11,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <script src="Scripts/AC_ActiveX.js" type="text/javascript"></script>
 <script src="Scripts/AC_RunActiveContent.js" type="text/javascript"></script>
-<script type="text/javascript">
-    function saveDownload(id)
-    {
-        $.post("media_download_process.php",
-        {
-            id: id,
-        },
-        function(message) 
-        { }
-        );
-    } 
-</script>
-
 </head>
 
 <body>
@@ -42,12 +29,14 @@ if(isset($_GET['id'])) {
 	$filepath=$result_row[4]; 
 	$type=$result_row[2];
 ?>
-        <a href="<?php echo $result_row[4];?>" target="_blank" onclick="javascript:saveDownload(<?php echo $result_row[4];?>);">Download</a>
+        <a href="<?php echo $result_row[4];?>" target="_blank" download >Download</a>
 <?php
+echo "\n Views:" . $result_row[7] . " ";
+
 	if(substr($type,0,5)=="image") //view image
 	{
 		echo "Viewing Picture:";
-		echo $result_row[4];
+		echo $result_row[0];
 		echo "<img src='".$filepath."'/>";
 
 	}

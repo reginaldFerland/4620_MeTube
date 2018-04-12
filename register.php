@@ -21,15 +21,27 @@ if(isset($_POST['submit'])) {
 		$register_error = "Passwords don't match. Try again?";
 	}
 	else {
-		$check = user_exist_check($_POST['username'], $_POST['passowrd1']);	
+                $checkEmail = validate_email($_POST['email']);
+                if($checkEmail == 1){
+                
+		$check = user_exist_check($_POST['username'], $_POST['passowrd1'], $_POST['email']);	
 		if($check == 1){
 			//echo "Register succeeds";
 			$_SESSION['username']=$_POST['username'];
 			header('Location: .');
 		}
 		else if($check == 2){
-			$register_error = "Username already exists. Please user a different username.";
+			$register_error = "Username already exists. Please use a different username.";
 		}
+                else if($check == 3){
+                        $register_error = "Email already exists. Please use a different email.";
+                }
+                }
+                else{
+                    // Bad email
+                    $register_error = "Invalid Email";
+               }
+
 	}
 }
 
@@ -37,6 +49,9 @@ if(isset($_POST['submit'])) {
 <form action="register.php" method="post" style="max-width:200px; margin: 20px" class="mx-auto">
   <div class="form-group">
     <input type="text" name="username" placeholder="Username">
+  </div>
+  <div class="form-group">
+    <input type="text" name="email" placeholder="Email">
   </div>
   <div class="form-group">
     <input  type="password" name="passowrd1" placeholder="Password">
