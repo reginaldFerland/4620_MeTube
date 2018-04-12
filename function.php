@@ -105,8 +105,11 @@ function validate_email($email)
 
 }
 
-
-
+function incrementViewCount($id)
+{
+    $update = "UPDATE media SET viewcount = viewcount +1 where mediaid = '". $id ."'";
+    mysql_query ($update);
+}
 
 
 

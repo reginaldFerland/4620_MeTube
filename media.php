@@ -24,8 +24,8 @@ if(isset($_GET['id'])) {
 	$result_row = mysql_fetch_row($result);
 	
 	//updateMediaTime($_GET['id']);
-	
-	$filename=$result_row[0];   ////0, 4, 2
+        incrementViewCount($_GET['id']);
+        $filename=$result_row[0];   ////0, 4, 2
 	$filepath=$result_row[4]; 
 	$type=$result_row[2];
 ?>
