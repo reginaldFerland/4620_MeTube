@@ -23,7 +23,7 @@ if(isset($_POST['submit'])) {
 	else {
 		$check = user_exist_check($_POST['username'], $_POST['passowrd1']);	
 		if($check == 1){
-			//echo "Rigister succeeds";
+			//echo "Register succeeds";
 			$_SESSION['username']=$_POST['username'];
 			header('Location: .');
 		}
