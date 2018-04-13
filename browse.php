@@ -65,9 +65,9 @@
 
 <div class="col"> 
 <div class="card text-center" style="width: 18rem;">
-  <a href="media.php?id=<?php echo $mediaid;?>" target="_blank"><img class="card-img-top" src="<?php echo $filenpath; ?>" alt="Card image cap"></a>
+  <a href="media.php?id=<?php echo $mediaid;?>" target="_blank"><img class="card-img-top" style="height:250px" src="<?php echo $filenpath; ?>" alt="Card image cap"></a>
   <div class="card-body">
-    <h5 class="card-title"><?php echo $filename; ?></h5>
+    <h5 class="card-title"><?php echo substr($filename,0, 22); ?></h5>
     <p class="card-text">From: <?php echo $username; ?></p>
     <p class="card-text">Views: <?php echo $viewcount; ?> </p>
   </div>

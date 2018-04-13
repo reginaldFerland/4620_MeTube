@@ -13,23 +13,20 @@
 
   <!-- Determine if logged in -->
   <?php
-  if(isset($_SESSION['username'])) {
-  echo('
+  if(isset($_SESSION['username'])) { ?>
     <!-- Profile and Log out -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
           <a class="nav-link" href="media_upload.php">Upload File</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="./profile.php">Profile</a>
+        <a class="nav-link" href="./profile.php?username=<?php echo $_SESSION["username"];?>">Profile</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="./logout.php">Log Out</a>
       </li>
     </ul>
-  ');}
-  else {
-  echo(' 
+  <?php } else { ?>
     <!-- Log in or Register -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
@@ -39,7 +36,7 @@
         <a class="nav-link" href="./register.php">Register</a>
       </li>
     </ul>
-  ');} ?>
+   <?php  } ?>
 
 </nav>
 </header>

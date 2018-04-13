@@ -15,7 +15,7 @@ function user_exist_check ($username, $password, $email){
                 $rowEmail = mysql_fetch_assoc($resultEmail);
 		if(($row == 0) and ($rowEmail == 0)){
                         $date = date('c');
-			$query = "insert into account values ('$username','$password','$email','user','NULL','NULL','NULL','NULL','$date')";
+			$query = "insert into account values ('$username','$password','$email','user','NULL','NULL','NULL','NULL','$date', 'NULL')";
 			echo "insert query:" . $query;
 			$insert = mysql_query( $query );
 			if($insert)

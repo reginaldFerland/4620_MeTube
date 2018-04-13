@@ -25,11 +25,19 @@ if(!file_exists($dirfile))
 	{
 		$upfile = $dirfile.urlencode($_FILES["file"]["name"]);
 	  
-	  if(file_exists($upfile))
+	  #if(file_exists($upfile))
 	  {
-	  	$result="5"; //The file has been uploaded.
+                $filename = $_FILES["file"]["name"];
+                $uploads = "select uploads from account where username = '" . $username . "'";
+                $results = mysql_query($uploads);
+		$results_row = mysql_fetch_assoc($results);
+                $file_basename = $results_row["uploads"];
+		$file_ext = substr($filename, strripos($filename, '.')); 
+                $upfile = $dirfile.$file_basename . $file_ext;
+                $update = "UPDATE account set uploads = uploads + 1 where username = '" . $username . "'";
+                mysql_query($update);
 	  }
-	  else{
+	  {
 			if(is_uploaded_file($_FILES["file"]["tmp_name"]))
 			{
 				if(!move_uploaded_file($_FILES["file"]["tmp_name"],$upfile))
