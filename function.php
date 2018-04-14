@@ -112,7 +112,6 @@ function incrementViewCount($id)
 }
 
 
-
 function other()
 {
 	//You can write your own functions here.
