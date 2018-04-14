@@ -25,8 +25,6 @@ if(!file_exists($dirfile))
 	{
 		$upfile = $dirfile.urlencode($_FILES["file"]["name"]);
 	  
-	  #if(file_exists($upfile))
-	  {
                 $filename = $_FILES["file"]["name"];
                 $uploads = "select uploads from account where username = '" . $username . "'";
                 $results = mysql_query($uploads);
@@ -37,8 +35,6 @@ if(!file_exists($dirfile))
                 $update = "UPDATE account set uploads = uploads + 1 where username = '" . $username . "'";
                 $date = date('c');
                 mysql_query($update);
-	  }
-	  {
 			if(is_uploaded_file($_FILES["file"]["tmp_name"]))
 			{
 				if(!move_uploaded_file($_FILES["file"]["tmp_name"],$upfile))
@@ -60,7 +56,6 @@ if(!file_exists($dirfile))
 			{
 					$result="7"; //upload file failed
 			}
-		}
 	}
 	
 	//You can process the error code of the $result here.
