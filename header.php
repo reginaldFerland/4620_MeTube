@@ -6,8 +6,8 @@
   <a class="navbar-brand" href="./">METUBE</a>
 
   <!-- Search Bar -->
-  <form class="form-inline" action="">
-    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+  <form class="form-inline" action="./search.php" method="POST">
+    <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search">
     <button class="btn btn-success" type="submit">Search</button>
   </form>
 
