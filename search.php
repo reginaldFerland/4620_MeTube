@@ -20,7 +20,7 @@
 <!-- Query media -->
 <?php
     $searchTerm = $_POST["search"];
-    $query = "SELECT * from media where (filename LIKE '%" .$searchTerm ."%')"; 
+    $query = "SELECT * from media where (filename LIKE '%" .$searchTerm ."%') OR (username LIKE '%" .$searchTerm ."%') ORDER BY viewcount DESC"; 
     $result = mysql_query( $query );
     if (!$result){
         die ("Could not query the media table in the database: <br />". mysql_error());
