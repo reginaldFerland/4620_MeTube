@@ -95,7 +95,7 @@ function validate_email($email)
         return 3;
     }
 
-    if(!((strpos($email, ".com") !== False) or (strpos($email, ".edu")!== False)) {
+    if(!((strpos($email, ".com") !== False) or (strpos($email, ".edu")!== False))) {
         return 4;
     }
 
