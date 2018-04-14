@@ -26,6 +26,8 @@ session_start();
         Add a Media: <label style="color:#663399"><em> (Each file limit 10M)</em></label><br/>
     <input name="file" type="file" size="50" />
     <input name="name" type="text" placeholder="Name"/>
+    <input name="description" type="text" placeholder="Description?"/>
+    <input name="tags" type="text" placeholder="dog, cat, mountians, ect"/>
   
     <input value="Upload" name="submit" type="submit" />
     </p>

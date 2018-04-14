@@ -28,7 +28,7 @@ if(isset($_POST['submit'])) {
             if($check == 1){
                 //echo "Register succeeds";
                 $_SESSION['username']=$_POST['username'];
-                header('Location: .');
+                header('Location: ./profile_edit.php');
             }
             else if($check == 2){
                 $register_error = "Username already exists. Please use a different username.";

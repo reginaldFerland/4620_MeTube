@@ -70,7 +70,7 @@ $profile_url = $profile_row["path"];
             <p><?php echo $username;?> has uploaded <?php echo $uploads;?> files.</p>
         </div>
     </div>
-    <?php if($self) {?> <div class="btn-group"> <a href="./profile_edit" class="btn btn-primary active">Edit</a> </div><?php }?>
+    <?php if($self) {?> <div class="btn-group"> <a href="./profile_edit.php" class="btn btn-primary active">Edit</a> </div><?php }?>
 </div>
 
 <!-- Browse uploaded files -->
