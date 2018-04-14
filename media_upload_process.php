@@ -27,7 +27,7 @@ if(!file_exists($dirfile))
     {
         $upfile = $dirfile.urlencode($_FILES["file"]["name"]);
       
-        if(isset($_POST["name"])) {
+        if(!empty($_POST["name"])) {
             $postname = $_POST["name"];
         }
         else {
