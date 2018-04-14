@@ -27,6 +27,12 @@ if(!file_exists($dirfile))
     {
         $upfile = $dirfile.urlencode($_FILES["file"]["name"]);
       
+        if(isset($_POST["name"])) {
+            $postname = $_POST["name"];
+        }
+        else {
+            $postname = $_FILES["file"]["name"];
+        }
         $filename = $_FILES["file"]["name"];
         $uploads = "select uploads from account where username = '" . $username . "'";
         $results = mysql_query($uploads);
@@ -47,7 +53,7 @@ if(!file_exists($dirfile))
             {
                 //insert into media table
                 $insert = "insert into media(mediaid, filename,username,type, path,upload_time)".
-                "values(NULL,'". urlencode($_FILES["file"]["name"])."','$username','".$_FILES["file"]["type"]."', '$upfile','$date')";
+                "values(NULL,'". urlencode($postname)."','$username','".$_FILES["file"]["type"]."', '$upfile','$date')";
                 $queryresult = mysql_query($insert)
                 or die("Insert into Media error in media_upload_process.php " .mysql_error());
                 $result="0";
