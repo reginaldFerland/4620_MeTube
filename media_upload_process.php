@@ -35,6 +35,7 @@ if(!file_exists($dirfile))
 		$file_ext = substr($filename, strripos($filename, '.')); 
                 $upfile = $dirfile.$file_basename . $file_ext;
                 $update = "UPDATE account set uploads = uploads + 1 where username = '" . $username . "'";
+                $date = date('c');
                 mysql_query($update);
 	  }
 	  {
@@ -47,8 +48,8 @@ if(!file_exists($dirfile))
 				else /*Successfully upload file*/
 				{
 					//insert into media table
-					$insert = "insert into media(mediaid, filename,username,type, path)".
-							  "values(NULL,'". urlencode($_FILES["file"]["name"])."','$username','".$_FILES["file"]["type"]."', '$upfile')";
+					$insert = "insert into media(mediaid, filename,username,type, path,upload_time)".
+	  "values(NULL,'". urlencode($_FILES["file"]["name"])."','$username','".$_FILES["file"]["type"]."', '$upfile','$date')";
 					$queryresult = mysql_query($insert)
 						  or die("Insert into Media error in media_upload_process.php " .mysql_error());
 					$result="0";
