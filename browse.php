@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 	include_once "function.php";
 ?>
@@ -13,10 +12,24 @@
     ?>
 </div>
 <br/><br/>
-<!-- Query media -->
+
+<!-- Query media - MOST VIEWS-->
 <?php
 
-    $query = "SELECT * from media where username != 'NULL'"; 
+    $query = "SELECT * from media where username != 'NULL' ORDER BY viewcount DESC"; 
+    $result = mysql_query( $query );
+    if (!$result){
+       die ("Could not query the media table in the database: <br />". mysql_error());
+    }
+
+?>
+
+<?php include('display_media.php');?>
+
+<!-- Query media - NEWEST-->
+<?php
+
+    $query = "SELECT * from media where username != 'NULL' ORDER BY upload_time DESC"; 
     $result = mysql_query( $query );
     if (!$result){
        die ("Could not query the media table in the database: <br />". mysql_error());
