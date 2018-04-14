@@ -7,22 +7,22 @@
 <body>
 
 <?php
-   session_save_path("/home/rferlan/public_html/metube/session");
-   session_start();
+    session_save_path("/home/rferlan/public_html/metube/session");
+    session_start();
 ?>
 
 <!-- Include same header across website -->
 <?php
-include('header.php');
+    include('header.php');
 ?>
 
 <?php
-include('browse.php');
+    include('browse.php');
 ?>
 
 <!-- Include same footer across website -->
 <?php
-include('footer.php');
+    include('footer.php');
 ?>
 </body>
 </html>
