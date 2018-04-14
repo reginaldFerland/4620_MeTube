@@ -16,7 +16,7 @@
 <!-- Query media - MOST VIEWS-->
 <?php
 
-    $query = "SELECT * from media where username != 'NULL' ORDER BY viewcount DESC"; 
+    $query = "SELECT * from media where username != 'NULL' ORDER BY viewcount DESC LIMIT 6"; 
     $result = mysql_query( $query );
     if (!$result){
        die ("Could not query the media table in the database: <br />". mysql_error());
@@ -29,7 +29,7 @@
 <!-- Query media - NEWEST-->
 <?php
 
-    $query = "SELECT * from media where username != 'NULL' ORDER BY upload_time DESC"; 
+    $query = "SELECT * from media where username != 'NULL' ORDER BY upload_time DESC LIMIT 6"; 
     $result = mysql_query( $query );
     if (!$result){
        die ("Could not query the media table in the database: <br />". mysql_error());
