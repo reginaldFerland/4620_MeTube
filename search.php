@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-	include_once "function.php";
+    include_once "function.php";
 ?>
 <html>
 <head>
@@ -23,7 +23,7 @@
     $query = "SELECT * from media where (filename LIKE '%" .$searchTerm ."%')"; 
     $result = mysql_query( $query );
     if (!$result){
-       die ("Could not query the media table in the database: <br />". mysql_error());
+        die ("Could not query the media table in the database: <br />". mysql_error());
     }
 ?>
 
