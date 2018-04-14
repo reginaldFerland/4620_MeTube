@@ -25,6 +25,7 @@ if(isset($_GET['id'])) {
     
     //updateMediaTime($_GET['id']);
     incrementViewCount($_GET['id']);
+    updateLastView($_GET['id']);
     $filename=$result_row[0];   ////0, 4, 2
     $filepath=$result_row[4]; 
     $type=$result_row[2];

@@ -109,6 +109,12 @@ function incrementViewCount($id)
     mysql_query ($update);
 }
 
+function updateLastView($id)
+{
+    $update = "UPDATE media SET last_access = '".date('c')."' where mediaid = '".$id."'";
+    mysql_query($update);
+
+}
 
 function other()
 {
