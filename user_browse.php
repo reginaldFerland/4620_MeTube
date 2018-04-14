@@ -2,33 +2,12 @@
 <?php
 	include_once "function.php";
 ?>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Browse</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" type="text/css" href="css/default.css" /> -->
-    <script type="text/javascript" src="js/jquery-latest.pack.js"></script>
-</head>
 
-<body>
-
-<!-- browse categories -->
-
-<div id='upload_result'>
-    <?php 
-        if(isset($_REQUEST['result']) && $_REQUEST['result']!=0)
-        {		
-            echo upload_error($_REQUEST['result']);
-        }
-    ?>
-</div>
-<br/><br/>
 <!-- Query media -->
 <?php
+    $username = $_GET['username'];
 
-    $query = "SELECT * from media where username != 'NULL'"; 
+    $query = "SELECT * from media where username = '" .$username ."'"; 
     $result = mysql_query( $query );
     if (!$result){
        die ("Could not query the media table in the database: <br />". mysql_error());
@@ -69,5 +48,3 @@
 
 </div>
 
-</body>
-</html>
