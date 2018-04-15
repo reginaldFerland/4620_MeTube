@@ -11,6 +11,7 @@ $pic = $_POST['profile'];
 $fname = $_POST['fname'];
 $lname = $_POST['lname'];
 $email = $_POST['email'];
+$about = $_POST['about'];
 $new_password = $_POST['passowrd1'];
 $new_password2 = $_POST['passowrd2'];
 $password = $_POST['password'];
@@ -46,6 +47,10 @@ if(!empty($lname)) {
 
 if(!empty($email)) {
     $UPDATE .= "email = '" .$email ."', ";
+}
+
+if(!empty($about)) {
+    $UPDATE .= "about = '" . $about ."', ";
 }
 
 if(!empty($new_password)) {

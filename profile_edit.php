@@ -22,6 +22,9 @@ if($lname == "NULL") {
 }
 $email = $result_row["email"];
 $about = $result_row["about"];
+if(empty($about) or is_null($about) or !isset($about)) {
+    $about = "An empty about section!";
+}
 $join_date = $result_row["join_date"];
 $uploads = $result_row["uploads"];
 $profile_pic = $result_row["mediaID"];
@@ -43,7 +46,7 @@ $profile_url = $profile_row["path"];
 
 <form action="update_profile.php" method="post" style="max-width:200px; margin: 20px" class="mx-auto">
     <div class="form-group">
-        <input type="text" name="profile">
+        <input type="text" name="profile" placeholder="pictureID, default 0">
     </div>
     <div class="form-group">
         <input type="text" name="fname" placeholder="<?php echo $fname;?>">
@@ -53,6 +56,9 @@ $profile_url = $profile_row["path"];
     </div>
     <div class="form-group">
         <input type="text" name="email" placeholder="<?php echo $email;?>">
+    </div>
+    <div class="form-group">
+        <textarea type="text" name="about" placeholder="<?php echo $about;?>"></textarea>
     </div>
     <div class="form-group">
         <input  type="password" name="passowrd1" placeholder="New Password">

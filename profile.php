@@ -26,6 +26,9 @@ $fname = $result_row["fname"];
 $lname = $result_row["lname"];
 $email = $result_row["email"];
 $about = $result_row["about"];
+if(empty($about) or is_null($about) or !isset($about)) {
+    $about = "An empty about section!";
+}
 $join_date = $result_row["join_date"];
 $uploads = $result_row["uploads"];
 $profile_pic = $result_row["mediaID"];
@@ -64,13 +67,15 @@ $profile_url = $profile_row["path"];
             <!-- Title row -->
             <h4 class="media-heading">Welcome to <?php echo $username?>'s page</h4>
             <!-- Real Name goes here -->
-            <p><?php echo $fname . " " . $lname;?></p>
+            <p><?php if($fname != "NULL") { echo $fname;}?> <?php if($lname != "NULL") { echo $lname;} ?>
             <!-- User Join Date -->
-            <p>Joined on <?php echo $join_date;?>.</p>
-            <p><?php echo $username;?> has uploaded <?php echo $uploads;?> files.</p>
+            Joined on <?php echo $join_date;?>. 
+            <?php echo $username;?> has uploaded <?php echo $uploads;?> files.</p>
+            <!-- About section -->
+            <p><?php echo $about;?></p>
         </div>
     </div>
-    <?php if($self) {?> <div class="btn-group"> <a href="./profile_edit.php" class="btn btn-primary active">Edit</a> </div><?php }?>
+    <?php if($self) {?> <div> <a href="./profile_edit.php" class="btn btn-primary active">Edit</a> </div><?php }?>
 </div>
 
 <!-- Browse uploaded files -->
