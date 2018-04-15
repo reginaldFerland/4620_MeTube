@@ -1,5 +1,5 @@
 <!-- Display media -->
-<div class="row">
+<div class="row my-5">
     <!-- Loops through all results -->
     <?php 
         while ($result_row = mysql_fetch_row($result)) //filename, username, type, mediaid, path
@@ -14,15 +14,15 @@
             $viewcount = $result_row[7];
     ?>
 
-<div class="col"> 
-<div class="card text-center" style="width: 18rem;">
-    <a href="media.php?id=<?php echo $mediaid;?>" target="_blank"><img class="card-img-top" style="height:250px" src="<?php echo $filenpath; ?>" alt="Card image cap"></a>
-    <div class="card-body">
-        <h5 class="card-title"><?php echo substr($filename,0, 22); ?></h5>
-        <p class="card-text">From: <a href="./profile.php?username=<?php echo $username; ?>"><?php echo $username;?></a></p>
-        <p class="card-text">Views: <?php echo $viewcount; ?> </p>
+<div class="col mx-0"> 
+    <div class="card text-center" style="width: 18rem;">
+        <a href="media.php?id=<?php echo $mediaid;?>" target="_blank"><img class="card-img-top" style="height:250px" src="<?php echo $filenpath; ?>" alt="Card image cap"></a>
+        <div class="card-body">
+            <h5 class="card-title"><?php echo substr($filename,0, 22); ?></h5>
+            <p class="card-text">From: <a href="./profile.php?username=<?php echo $username; ?>"><?php echo $username;?></a></p>
+            <p class="card-text">Views: <?php echo $viewcount; ?> </p>
+        </div>
     </div>
-</div>
 </div>
 
     <!-- End loop -->
