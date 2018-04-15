@@ -1,5 +1,5 @@
 <!-- Display media -->
-<div class="row my-5">
+<div class="row m-5">
     <!-- Loops through all results -->
     <?php 
         while ($result_row = mysql_fetch_row($result)) //filename, username, type, mediaid, path

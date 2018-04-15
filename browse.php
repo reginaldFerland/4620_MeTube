@@ -17,7 +17,7 @@
 <h1 class="text-center">Most Viewed</h1>
 <?php
 
-    $query = "SELECT * from media where username != 'NULL' ORDER BY viewcount DESC LIMIT 6"; 
+    $query = "SELECT * from media where username != 'NULL' ORDER BY viewcount DESC LIMIT 5"; 
     $result = mysql_query( $query );
     if (!$result){
        die ("Could not query the media table in the database: <br />". mysql_error());
@@ -31,7 +31,7 @@
 <h1 class="text-center">Recent Uploads</h1>
 <?php
 
-    $query = "SELECT * from media where username != 'NULL' ORDER BY upload_time DESC LIMIT 6"; 
+    $query = "SELECT * from media where username != 'NULL' ORDER BY upload_time DESC LIMIT 5"; 
     $result = mysql_query( $query );
     if (!$result){
        die ("Could not query the media table in the database: <br />". mysql_error());
@@ -40,4 +40,19 @@
 ?>
 
 <?php include('display_media.php');?>
+
+<!-- Query media - Recently Viewed-->
+<h1 class="text-center">Recently Viewed</h1>
+<?php
+
+    $query = "SELECT * from media where username != 'NULL' ORDER BY last_access DESC LIMIT 5"; 
+    $result = mysql_query( $query );
+    if (!$result){
+       die ("Could not query the media table in the database: <br />". mysql_error());
+    }
+
+?>
+
+<?php include('display_media.php');?>
+
 
