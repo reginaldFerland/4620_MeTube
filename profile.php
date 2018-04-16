@@ -73,6 +73,15 @@ $profile_url = $profile_row["path"];
             <!-- About section -->
             <p><?php echo $about;?></p>
         </div>
+        <div class="media-right mx-auto">
+            <h4 class=media-heading"><?php echo $username;?>'s Friends</h4>
+            <?php
+                $query = "SELECT * from Contact where username='$username' LIMIT 5";
+                $results = mysql_query($query);
+                while ($results_row = mysql_fetch_assoc($results)) { $friend = $results_row['friend']; ?>
+                    <p><a href="./profile.php?username=<?php echo $friend;?>"><?php echo $friend;?></a></p>
+            <?php }?>
+        </div>
     </div>
     <?php if($self) {?> <div> <a href="./profile_edit.php" class="btn btn-primary active">Edit</a> </div><?php }
     else { ?>
