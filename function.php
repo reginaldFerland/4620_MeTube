@@ -37,6 +37,15 @@ function email_exist_check ($email) {
 
 function create_user ($username, $email, $password)
 {
+    if(user_exist_check($username)) {
+        return 2;
+    }
+    if(email_exist_check($email)) {
+        return 3;
+    }
+    if(validate_email($email) != 1) {
+        return 4;
+    }
     $date = date('c');
     $query = "insert into Account (username, email, password, join_date) values ('$username','$email','$password','$date')";
     $insert = mysql_query( $query );
@@ -169,17 +178,17 @@ function add_friend($user, $friend, $type='none')
 {
     // Check that friend is real
     if(!user_exist_check($friend)) {
-        return 1;   // Friend does not exist
+        return 2;   // Friend does not exist
     }
 
     // Check that user is not blocked
     if(is_blocked($user, $friend)) {
-        return 2;   // user is blocked
+        return 3;   // user is blocked
     }
 
     // Check that user is not already friends
     if(is_friends($user, $friend)) {
-        return 3;   // Already Friends
+        return 4;   // Already Friends
     }
 
     // Update tables
@@ -190,6 +199,32 @@ function add_friend($user, $friend, $type='none')
     else
         die ("Could not insert into the database: <br />". mysql_error());      
  
+}
+
+function remove_friend($user, $friend)
+{
+    // Check user exists
+    if(!user_exist_check($user)) {
+        return 2;
+    }
+
+    // Check friend exists
+    if(!user_exist_check($friend)) {
+        return 3;
+    }
+
+    // Check that they are friends
+    if(!is_friends($user, $friend)) {
+        return 4;
+    }
+
+    $drop = "delete from Contact where username = '$user' and friend = '$friend'";
+    $result = mysql_query($drop);
+    if($result)
+        return 1;   
+    else
+        die ("Could not delete from database: <br />". mysql_error());
+
 }
 
 function other()
