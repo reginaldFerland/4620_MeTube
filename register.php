@@ -24,7 +24,14 @@ if(isset($_POST['submit'])) {
     {
         $checkEmail = validate_email($_POST['email']);
         if($checkEmail == 1){
-            $check = user_exist_check($_POST['username'], $_POST['passowrd1'], $_POST['email']);    
+            if((!user_exist_check($_POST['username'])) and (!email_exist_check($_POST['email']))) {
+                create_user($_POST['username'], $_POST['email'], $_POST['passowrd1']);
+                $_SESSION['username']=$_POST['username'];
+                header('Location: ./profile_edit.php');
+            }
+
+/*
+            check_user_exists($_POST['username']);
             if($check == 1){
                 //echo "Register succeeds";
                 $_SESSION['username']=$_POST['username'];
@@ -36,6 +43,7 @@ if(isset($_POST['submit'])) {
             else if($check == 3){
                 $register_error = "Email already exists. Please use a different email.";
             }
+*/
         }
         else{
             // Bad email

@@ -20,12 +20,15 @@
 <!-- Query media -->
 <?php
     $searchTerm = $_POST["search"];
-    $query = "SELECT * from media where (filename LIKE '%" .$searchTerm ."%') OR (username LIKE '%" .$searchTerm ."%') ORDER BY viewcount DESC"; 
+    $query = "SELECT * from Media INNER JOIN Upload on Upload.mediaID = Media.mediaID where public = True AND"
+    ." ((name LIKE '%$searchTerm%') OR (username LIKE '%$searchTerm%') OR (description LIKE '%$searchTerm%')) ORDER BY viewcount DESC"; 
     $result = mysql_query( $query );
     if (!$result){
         die ("Could not query the media table in the database: <br />". mysql_error());
     }
 ?>
+
+<h1 class="text-center">Results for "<?php echo $searchTerm?>"</h1>
 
 <?php include('display_media.php');?>
 

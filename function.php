@@ -1,43 +1,56 @@
 <?php
 include "mysqlClass.inc.php";
 
-
-function user_exist_check ($username, $password, $email){
-    $query = "select * from account where username='$username'";
-    $queryEmail = "select * from account where email='$email'";
+function user_exist_check ($username) {
+    $query = "select * from Account where username='$username'";
     $result = mysql_query( $query );
-    $resultEmail = mysql_query($queryEmail);
-    if (!$result){
-        die ("user_exist_check() failed. Could not query the database: <br />". mysql_error());
-    }   
+    if (!$result) {
+        die ("user_exist_check() failed. Could not query the database: <br />".mysql_error());
+    }
     else {
         $row = mysql_fetch_assoc($result);
-        $rowEmail = mysql_fetch_assoc($resultEmail);
-        if(($row == 0) and ($rowEmail == 0)){
-            $date = date('c');
-            $query = "insert into account values ('$username','$password','$email','user','NULL','NULL','NULL','NULL','$date', 'NULL')";
-            echo "insert query:" . $query;
-            $insert = mysql_query( $query );
-            if($insert)
-                return 1;
-            else
-                die ("Could not insert into the database: <br />". mysql_error());      
+        if($row == 0) {
+            return False; # User does not exist
         }
-        else{
-            if($row == 0){ // Problem must be email
-                return 3;
-            }
-            return 2;
+        else {
+            return True; # User exists
         }
     }
 }
 
+function email_exist_check ($email) {
+    $query = "select * from Account where email='$email'";
+    $result = mysql_query( $query );
+    if (!$result) {
+        die ("email_exist_check() failed. Could not query the database: <br />".mysql_error());
+    }
+    else {
+        $row = mysql_fetch_assoc($result);
+        if($row == 0) {
+            return False; # Email does not exist in database
+        }
+        else {
+            return True; # Email is in database
+        }
+    }
+}
+
+function create_user ($username, $email, $password)
+{
+    $date = date('c');
+    $query = "insert into Account (username, email, password, join_date) values ('$username','$email','$password','$date')";
+    $insert = mysql_query( $query );
+    if($insert)
+        return 1;
+    else
+        die ("Could not insert into the database: <br />". mysql_error());      
+ 
+}
 
 function user_pass_check($username, $password)
 {
     
-    $query = "select * from account where username='$username'";
-    echo  $query;
+    $query = "select * from Account where username='$username'";
     $result = mysql_query( $query );
         
     if (!$result)
@@ -45,8 +58,8 @@ function user_pass_check($username, $password)
        die ("user_pass_check() failed. Could not query the database: <br />". mysql_error());
     }
     else{
-        $row = mysql_fetch_row($result);
-        if(strcmp($row[1],$password))
+        $row = mysql_fetch_assoc($result);
+        if(strcmp($row['password'],$password))
             return 2; //wrong password
         else 
             return 0; //Checked.
@@ -55,7 +68,7 @@ function user_pass_check($username, $password)
 
 function updateMediaTime($mediaid)
 {
-    $query = "  update  media set lastaccesstime=NOW() WHERE '$mediaid' = mediaid ";
+    $query = "  update Media set lastaccesstime=NOW() WHERE '$mediaid' = mediaid ";
     // Run the query created above on the database through the connection
     $result = mysql_query( $query );
     if (!$result)
@@ -105,13 +118,13 @@ function validate_email($email)
 
 function incrementViewCount($id)
 {
-    $update = "UPDATE media SET viewcount = viewcount +1 where mediaid = '". $id ."'";
+    $update = "UPDATE Media SET viewcount = viewcount +1 where mediaid = '". $id ."'";
     mysql_query ($update);
 }
 
 function updateLastView($id)
 {
-    $update = "UPDATE media SET last_access = '".date('c')."' where mediaid = '".$id."'";
+    $update = "UPDATE Media SET last_access = '".date('c')."' where mediaid = '".$id."'";
     mysql_query($update);
 
 }

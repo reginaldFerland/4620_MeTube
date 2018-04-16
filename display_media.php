@@ -2,16 +2,16 @@
 <div class="row m-5">
     <!-- Loops through all results -->
     <?php 
-        while ($result_row = mysql_fetch_row($result)) //filename, username, type, mediaid, path
+        while ($result_row = mysql_fetch_assoc($result)) //filename, username, type, mediaid, path
         { 
-            $mediaid = $result_row[3];
-            $username = $result_row[1];
-            $type = $result_row[2];
-            $filename = $result_row[0];
-            $filenpath = $result_row[4];
-            $time_access= $result_row[5];
-            $time_created = $result_row[6];
-            $viewcount = $result_row[7];
+            $mediaid = $result_row['mediaID'];
+            $username = $result_row['username'];
+            $type = $result_row['type'];
+            $filename = $result_row['name'];
+            $filenpath = $result_row['path'];
+            $time_access= $result_row['last_access'];
+            $time_created = $result_row['upload_time'];
+            $viewcount = $result_row['viewcount'];
     ?>
 
 <div class="col mx-0"> 

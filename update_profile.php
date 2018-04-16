@@ -8,8 +8,7 @@ $username = $_SESSION['username'];
 
 #Variables
 $pic = $_POST['profile'];
-$fname = $_POST['fname'];
-$lname = $_POST['lname'];
+$name = $_POST['name'];
 $email = $_POST['email'];
 $about = $_POST['about'];
 $new_password = $_POST['passowrd1'];
@@ -18,31 +17,27 @@ $password = $_POST['password'];
 
 # Check password
 
-$query = "SELECT * from account where username = '" .$username . "'";
+$query = "SELECT * from Account where username = '" .$username . "'";
 $result = mysql_query($query);
 $result_row = mysql_fetch_assoc($result);
 $current_password = $result_row['password'];
 
-$UPDATE = "UPDATE account SET ";
+$UPDATE = "UPDATE Account SET ";
 
 if($password != $current_password) {
-    return 1;
+    header("Location: profile.php?username=".$username);
 }
 
 if($new_password != $new_password2) {
-    return 2;
+    header("Location: profile.php?username=".$username);
 }
 
 if(!empty($pic)) {
-    $UPDATE .= "mediaid = '" .$pic . "', ";
+    $UPDATE .= "mediaID = '" .$pic . "', ";
 }
 
-if(!empty($fname)) {
-    $UPDATE .= "fname = '" .$fname ."', ";
-}
-
-if(!empty($lname)) {
-    $UPDATE .= "lname = '" .$lname ."', ";
+if(!empty($name)) {
+    $UPDATE .= "name = '" .$name ."', ";
 }
 
 if(!empty($email)) {

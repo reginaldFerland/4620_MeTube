@@ -14,7 +14,7 @@ else {
 
 # Check that this is valid user page
 $username = $_GET['username'];
-$query = "SELECT * from account where username = '" .$username . "'";
+$query = "SELECT * from Account where username = '" .$username . "'";
 $result = mysql_query($query);
 $result_row = mysql_fetch_assoc($result);
 if (mysql_num_rows($result) == 0) {
@@ -22,19 +22,18 @@ if (mysql_num_rows($result) == 0) {
 }
 
 #Variables
-$fname = $result_row["fname"];
-$lname = $result_row["lname"];
+$name = $result_row["name"];
 $email = $result_row["email"];
 $about = $result_row["about"];
 if(empty($about) or is_null($about) or !isset($about)) {
     $about = "An empty about section!";
 }
 $join_date = $result_row["join_date"];
-$uploads = $result_row["uploads"];
+$uploads = $result_row["upload"];
 $profile_pic = $result_row["mediaID"];
 
 #Profile Picture
-$query = "SELECT * from media where mediaID = '" .$profile_pic ."'";
+$query = "SELECT * from Media where mediaID = '" .$profile_pic ."'";
 $profile_result = mysql_query($query);
 $profile_row = mysql_fetch_assoc($profile_result);
 $profile_url = $profile_row["path"];
@@ -67,7 +66,7 @@ $profile_url = $profile_row["path"];
             <!-- Title row -->
             <h4 class="media-heading">Welcome to <?php echo $username?>'s page</h4>
             <!-- Real Name goes here -->
-            <p><?php if($fname != "NULL") { echo $fname;}?> <?php if($lname != "NULL") { echo $lname;} ?>
+            <p><?php if($name != "NULL") { echo $name;}?> 
             <!-- User Join Date -->
             Joined on <?php echo $join_date;?>. 
             <?php echo $username;?> has uploaded <?php echo $uploads;?> files.</p>
