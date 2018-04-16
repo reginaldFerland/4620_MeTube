@@ -74,7 +74,10 @@ $profile_url = $profile_row["path"];
             <p><?php echo $about;?></p>
         </div>
     </div>
-    <?php if($self) {?> <div> <a href="./profile_edit.php" class="btn btn-primary active">Edit</a> </div><?php }?>
+    <?php if($self) {?> <div> <a href="./profile_edit.php" class="btn btn-primary active">Edit</a> </div><?php }
+    else { ?>
+        <div> <a href="./add_friend.php?user=<?php echo $_SESSION['username'];?>&friend=<?php echo $username;?>" class="btn-primary active">Add Friend</a> </div>
+    <?php } ?>
 </div>
 
 <!-- Browse uploaded files -->

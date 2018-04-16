@@ -129,6 +129,69 @@ function updateLastView($id)
 
 }
 
+function is_blocked($user, $blocker)
+{
+    $query = "select * from Blocked_user where username='$blocker' and blocked='$user'";
+    $result = mysql_query( $query );
+    if (!$result) {
+        die ("user_exist_check() failed. Could not query the database: <br />".mysql_error());
+    }
+    else {
+        $row = mysql_fetch_assoc($result);
+        if($row == 0) {
+            return False; # User is not blocked
+        }
+        else {
+            return True; # User is blocked
+        }
+    }
+}
+
+function is_friends($user, $friend)
+{
+    $query = "select * from Contact where username='$user' and friend='$friend'";
+    $result = mysql_query( $query );
+    if (!$result) {
+        die ("user_exist_check() failed. Could not query the database: <br />".mysql_error());
+    }
+    else {
+        $row = mysql_fetch_assoc($result);
+        if($row == 0) {
+            return False; # User not friends
+        }
+        else {
+            return True; # User is friends
+        }
+    }
+}
+
+function add_friend($user, $friend, $type='none')
+{
+    // Check that friend is real
+    if(!user_exist_check($friend)) {
+        return 1;   // Friend does not exist
+    }
+
+    // Check that user is not blocked
+    if(is_blocked($user, $friend)) {
+        return 2;   // user is blocked
+    }
+
+    // Check that user is not already friends
+    if(is_friends($user, $friend)) {
+        return 3;   // Already Friends
+    }
+
+    // Update tables
+    $insert = "insert into Contact(username, friend, category) values ('$user', '$friend', '$type')";
+    $result = mysql_query($insert);
+    if($insert)
+        return 1;
+    else
+        die ("Could not insert into the database: <br />". mysql_error());      
+ 
+}
+
 function other()
 {
     //You can write your own functions here.
