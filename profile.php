@@ -31,6 +31,8 @@ if(empty($about) or is_null($about) or !isset($about)) {
 $join_date = $result_row["join_date"];
 $uploads = $result_row["upload"];
 $profile_pic = $result_row["mediaID"];
+if($profile_pic == NULL)
+    $profile_pic = 1;
 
 #Profile Picture
 $query = "SELECT * from Media where mediaID = '" .$profile_pic ."'";
