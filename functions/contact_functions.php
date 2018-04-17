@@ -80,4 +80,22 @@ function remove_friend($user, $friend)
 
 }
 
+function get_friends($user)
+{
+    // Check user exists
+    if(!user_exists($user)) {
+        return -1;
+    }
+
+    // Query Database
+    $query = "SELECT * FROM Contact where username = '$user'";
+    $result = mysql_query($drop);
+    if($result)
+        return $result;
+    else
+        die ("Could not search database: <br />" .mysql_error());
+
+
+}
+
 ?>

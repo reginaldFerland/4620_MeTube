@@ -13,10 +13,10 @@ function message_exists($id)
     else {
         $row = mysql_fetch_assoc($result);
         if($row == 0) {
-            return False; # Comment does not exist
+            return False; # Message does not exist
         }
         else {
-            return True; # Comment exists
+            return True; # Message exists
         }
     }
 }
@@ -77,7 +77,7 @@ function edit_message($id, $message)
         die ("Could not edit message: <br />". mysql_error());
 }
 
-function get_user_messages($user, $user2)
+function get_conversation($user, $user2)
 {
     // Check user exists
     if(!user_exists($user))
@@ -89,10 +89,32 @@ function get_user_messages($user, $user2)
 
     // Collect results
     $query = "SELECT * FROM Messages where (sender = '$user' and reciever = '$user2')"
-    . "or (sender = '$user2' and reciever = '$user2') order by messageID asc";
+    . "or (sender = '$user2' and reciever = '$user') order by messageID asc";
 
     // Return results
-    return mysql_query($query);
+    $result =  mysql_query($query);
+    if($result)
+        return $result;
+    else
+        die("Could not get conversation: <br />". mysql_error());
+}
+
+function get_conversation_list($user)
+{
+    // Check user exists
+    if(!user_exists($user))
+        return -1;
+
+    // Collect results
+    $query = "SELECT * FROM Messages where (sender = '$user' or reciever = '$user')";
+    
+    // Return results
+    $result = mysql_query($query);
+    if($result)
+        return $result;
+    else
+        die("Could not find conversations: <br />". mysql_error());
+
 }
 
 ?>
