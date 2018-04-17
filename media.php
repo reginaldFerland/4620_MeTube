@@ -4,6 +4,7 @@
     session_start();
     include_once("mysqlClass.inc.php");
     include_once("functions/media_functions.php");
+    include_once("functions/comments_functions.php");
 ?>  
 <html>
 <head>
@@ -60,6 +61,21 @@ else
     <meta http-equiv="refresh" content="0;url=index.php">
 <?php
 }
+?>
+
+<!-- Comment section -->
+<hr>
+<h5 class="text-center"> Comments </h5>
+
+<?php
+    $comment_results = get_media_comments($_GET['id']);
+    while($comment = mysql_fetch_assoc($comment_results))
+    {
+    echo "Comment #" . $comment['commentID'] . " ";
+    echo $comment['username'] . "\t";
+    echo $comment['comment'] . "\n";
+
+    }
 ?>
 
 
