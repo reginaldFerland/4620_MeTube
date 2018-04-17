@@ -1,7 +1,7 @@
 <!doctype html>
 <!-- For login management -->
 <?php 
-session_save_path("/home/rferlan/public_html/metube/session");
+session_save_path("./session");
 session_start(); 
 include_once("functions/account_functions.php");
 include_once("functions/media_functions.php");
