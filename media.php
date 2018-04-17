@@ -2,7 +2,8 @@
 <?php
     session_save_path("/home/rferlan/public_html/metube/session");
     session_start();
-    include_once "function.php";
+    include_once("mysqlClass.inc.php");
+    include_once("functions/media_functions.php");
 ?>  
 <html>
 <head>
@@ -23,9 +24,8 @@ if(isset($_GET['id'])) {
     $result = mysql_query( $query );
     $result_row = mysql_fetch_assoc($result);
     
-    //updateMediaTime($_GET['id']);
-    incrementViewCount($_GET['id']);
-    updateLastView($_GET['id']);
+    increment_views($_GET['id']);
+    update_media_timestamp($_GET['id']);
     $filename=$result_row['name'];   ////0, 4, 2
     $filepath=$result_row['path']; 
     $type=$result_row['type'];

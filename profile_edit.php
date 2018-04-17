@@ -1,35 +1,31 @@
 <?php
 session_save_path("/home/rferlan/public_html/metube/session");
 session_start(); 
-include_once('function.php');
+include_once('functions/account_functions.php');
+include_once('functions/media_functions.php');
 $username = $_SESSION['username'];
 
-$query = "SELECT * from Account where username = '" .$username . "'";
-$result = mysql_query($query);
-$result_row = mysql_fetch_assoc($result);
-if (mysql_num_rows($result) == 0) {
+if(!user_exists($username))
     header("Location: index.php");
-}
 
 #Variables
-$name = $result_row["name"];
+$user_info = get_user_info($username);
+$name = $user_info["name"];
 if($name == "NULL") {
     $name = "Name";
 }
-$email = $result_row["email"];
-$about = $result_row["about"];
+$email = $user_info["email"];
+$about = $user_info["about"];
 if(empty($about) or is_null($about) or !isset($about)) {
     $about = "An empty about section!";
 }
-$join_date = $result_row["join_date"];
-$uploads = $result_row["upload"];
-$profile_pic = $result_row["mediaID"];
+$join_date = $user_info["join_date"];
+$uploads = $user_info["upload"];
+$profile_pic = $user_info["mediaID"];
 
 #Profile Picture
-$query = "SELECT * from Media where mediaID = '" .$profile_pic ."'";
-$profile_result = mysql_query($query);
-$profile_row = mysql_fetch_assoc($profile_result);
-$profile_url = $profile_row["path"];
+$profile_info = get_media_info($profile_pic);
+$profile_url = $profile_info["path"];
 
 ?>
 

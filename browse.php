@@ -1,5 +1,5 @@
 <?php
-	include_once "function.php";
+	include_once "mysqlClass.inc.php";
 ?>
 <!-- browse categories -->
 

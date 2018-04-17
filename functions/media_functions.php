@@ -190,6 +190,23 @@ function add_like($id)
         return 5;
 }
 
+function get_media_info($id)
+{
+    // Check media exists
+    if(!media_exists($id))
+        return -1;
+
+    // Return results
+    $query = "select * from Media where mediaID='$id'";
+    $result = mysql_query( $query );
+    if (!$result) {
+        die ("media_exists() failed. Could not query the database: <br />".mysql_error());
+    }
+    else {
+        return mysql_fetch_assoc($result);
+    }
+
+}
 
 
 ?>

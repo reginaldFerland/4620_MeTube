@@ -2,7 +2,8 @@
 <?php
 session_save_path("/home/rferlan/public_html/metube/session");
 session_start(); 
-include_once('function.php');
+#include_once('function.php');
+include_once('functions/account_functions.php');
 
 $username = $_SESSION['username'];
 
@@ -24,41 +25,42 @@ $current_password = $result_row['password'];
 
 $UPDATE = "UPDATE Account SET ";
 
-if($password != $current_password) {
+if(!password_check($username, $password)) {
     header("Location: profile.php?username=".$username);
 }
+else
+{
+    
+    if($new_password != $new_password2) {
+        header("Location: profile.php?username=".$username);
+    }
+    else
+    {
 
-if($new_password != $new_password2) {
-    header("Location: profile.php?username=".$username);
+        if(!empty($pic)) {
+            change_pic($username, $pic);
+        }
+
+        if(!empty($name)) {
+            change_name($username, $name);
+        }
+
+        if(!empty($email)) {
+            change_email($username, $email);
+        }
+
+        if(!empty($about)) {
+            change_about($username, $about);
+        }
+    
+        if(!empty($new_password)) {
+            change_password($username, $new_password);
+        }
+
+        header("Location: profile.php?username=".$username);
+
+        return 0;
+    }
 }
-
-if(!empty($pic)) {
-    $UPDATE .= "mediaID = '" .$pic . "', ";
-}
-
-if(!empty($name)) {
-    $UPDATE .= "name = '" .$name ."', ";
-}
-
-if(!empty($email)) {
-    $UPDATE .= "email = '" .$email ."', ";
-}
-
-if(!empty($about)) {
-    $UPDATE .= "about = '" . $about ."', ";
-}
-
-if(!empty($new_password)) {
-    $UPDATE .= "password = '" .$new_password ."', ";
-}
-
-$UPDATE = rtrim($UPDATE, ', ');
-$UPDATE .= " WHERE username = '" .$username."'";
-
-mysql_query ($UPDATE);
-
-header("Location: profile.php?username=".$username);
-
-return 0;
 ?>
 

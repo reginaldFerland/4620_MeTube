@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-    include_once "function.php";
+    include_once "mysqlClass.inc.php";
 ?>
 <html>
 <head>

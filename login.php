@@ -15,21 +15,18 @@
 session_save_path("/home/rferlan/public_html/metube/session");
 session_start();
 
-include_once "function.php";
+include_once("functions/account_functions.php");
 
 if(isset($_POST['submit'])) {
     if($_POST['username'] == "" || $_POST['password'] == "") {
         $login_error = "One or more fields are missing.";
     }
     else {
-        $check = user_pass_check($_POST['username'],$_POST['password']); // Call functions from function.php
-        if($check == 1) {
-            $login_error = "User ".$_POST['username']." not found.";
+        $check = password_check($_POST['username'],$_POST['password']); // Call functions from function.php
+        if($check==False) {
+            $login_error = "Incorrect password or username.";
         }
-        elseif($check==2) {
-            $login_error = "Incorrect password.";
-        }
-        else if($check==0){
+        else if($check==True){
             $_SESSION['username']=$_POST['username']; //Set the $_SESSION['username']
             header('Location: .');
         }       

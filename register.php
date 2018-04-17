@@ -14,7 +14,7 @@
 session_save_path("/home/rferlan/public_html/metube/session");
 session_start();
 
-include_once "function.php";
+include_once "functions/account_functions.php";
 
 if(isset($_POST['submit'])) {
     if( $_POST['passowrd1'] != $_POST['passowrd2']) {
@@ -24,26 +24,11 @@ if(isset($_POST['submit'])) {
     {
         $checkEmail = validate_email($_POST['email']);
         if($checkEmail == 1){
-            if((!user_exist_check($_POST['username'])) and (!email_exist_check($_POST['email']))) {
+            if((!user_exists($_POST['username'])) and (!email_exists($_POST['email']))) {
                 create_user($_POST['username'], $_POST['email'], $_POST['passowrd1']);
                 $_SESSION['username']=$_POST['username'];
                 header('Location: ./profile_edit.php');
             }
-
-/*
-            check_user_exists($_POST['username']);
-            if($check == 1){
-                //echo "Register succeeds";
-                $_SESSION['username']=$_POST['username'];
-                header('Location: ./profile_edit.php');
-            }
-            else if($check == 2){
-                $register_error = "Username already exists. Please use a different username.";
-            }
-            else if($check == 3){
-                $register_error = "Email already exists. Please use a different email.";
-            }
-*/
         }
         else{
             // Bad email

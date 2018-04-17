@@ -60,7 +60,7 @@ function create_user ($username, $email, $password)
 function password_check($username, $password)
 {
     if(!user_exists($username)) {
-        return 2;
+        return False;
     }
     
     $query = "select * from Account where username='$username'";
@@ -68,14 +68,14 @@ function password_check($username, $password)
         
     if (!$result)
     {
-       die ("user_pass_check() failed. Could not query the database: <br />". mysql_error());
+       die ("password_check() failed. Could not query the database: <br />". mysql_error());
     }
     else{
         $row = mysql_fetch_assoc($result);
         if(strcmp($row['password'],$password))
-            return 3; //wrong password
+            return False; //wrong password
         else 
-            return 1; //Checked.
+            return True; //Checked.
     }   
 }
 
@@ -258,6 +258,23 @@ function get_uploads($user)
         return $row["upload"];
     }
 
+}
+
+function get_user_info($user)
+{
+    // Check user exists
+    if(!user_exists($user))
+        return -1;
+    
+    // Query 
+    $query = "select * from Account where username='$user'";
+    $result = mysql_query( $query );
+    if (!$result) {
+        die ("get_uploadss() failed. Could not query the database: <br />".mysql_error());
+    }
+    else {
+        return mysql_fetch_assoc($result);
+    }
 }
 
 ?>
