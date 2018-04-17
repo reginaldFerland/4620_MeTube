@@ -1,5 +1,5 @@
 <?php
-include_once("../mysqlClass.inc.php");
+include_once("mysqlClass.inc.php");
 include_once("account_functions.php");
 
 function is_blocked($user, $block)

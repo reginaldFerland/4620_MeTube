@@ -1,5 +1,5 @@
 <?php
-include_once("../mysqlClass.inc.php");
+include_once("mysqlClass.inc.php");
 include_once("blocked_user_functions.php");
 
 function user_exists ($username) {
@@ -239,6 +239,25 @@ function change_pic($user, $mediaID=1)
     }
     else
         die ("Could not update picture: <br />" .mysql_error());
+}
+
+function get_uploads($user)
+{
+    // Check if user exists
+    if(!user_exists($user))
+        return -1;
+
+    // Query 
+    $query = "select * from Account where username='$user'";
+    $result = mysql_query( $query );
+    if (!$result) {
+        die ("get_uploadss() failed. Could not query the database: <br />".mysql_error());
+    }
+    else {
+        $row = mysql_fetch_assoc($result);
+        return $row["upload"];
+    }
+
 }
 
 ?>

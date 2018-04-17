@@ -1,5 +1,5 @@
 <?php
-include_once("../mysqlClass.inc.php");
+include_once("mysqlClass.inc.php");
 include_once("account_functions.php");
 include_once("blocked_user_functions.php");
 

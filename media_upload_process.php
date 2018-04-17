@@ -1,7 +1,8 @@
 <?php
 session_save_path("/home/rferlan/public_html/metube/session");
 session_start();
-include_once "function.php";
+include_once "functions/upload_functions.php";
+include_once "functions/account_functions.php";
 
 /******************************************************
 *
@@ -29,10 +30,10 @@ if(!file_exists($dirfile))
         // Create unique server filename
         $original_filename = $_FILES["file"]["name"];
         $file_ext = substr($original_filename, strripos($original_filename, '.'));
-        $upload_query = "select upload from Account where username = '" .$username."'";
-        $results = mysql_query($upload_query);
-        $results_row = mysql_fetch_assoc($results);
-        $file_basename = $results_row["upload"];
+  
+        // Get upload for filename
+        $file_basename = get_uploads($username);
+
         $file_path = $dirfile . $file_basename . $file_ext;
         
         // Meta Data creation
@@ -42,12 +43,9 @@ if(!file_exists($dirfile))
         else {
             $name = substr($original_filename,0,strripos($original_filename,'.'));
         }
-        $description = $_POST["description"];
-        $date = date('c');
         
         // Update account
-        $update = "UPDATE Account set upload = upload + 1 where username = '" . $username . "'";
-        mysql_query($update);
+        increment_upload($username);
 
         // Check file uploaded and insert into media and uploads
         if(is_uploaded_file($_FILES["file"]["tmp_name"]))
@@ -59,20 +57,14 @@ if(!file_exists($dirfile))
             else #Successfully upload file
             {
                 //insert into media table
-                $insert = "insert into Media(path, type, name, last_access, description, public)".
-                "values('".$file_path."', '".$_FILES["file"]["type"]."', '".$name."', '".$date."', '".$description."', '1' )";
-                $queryresult = mysql_query($insert)
-                or die("Insert into Media error in media_upload_process.php " .mysql_error());
-
-                // Insert into Upload table
-                #$result_row = mysql_fetch_assoc($queryresult);
-                $mediaID = mysql_insert_id(); #$result_row["mediaID"];
+                $description = $_POST["description"];
+                $mediaID = add_media($file_path, $_FILES["file"]["type"], $name, $description);
                 $ip = $_SERVER['REMOTE ADDR'];
-                $insert = "insert into Upload(username, mediaID, ip, upload_time)".
-                "values('$username','$mediaID','$ip','$date')";
-                $q_result = mysql_query($insert)
-                or die("Insert into Upload error in media_upload_process.php". mysql_error());
-
+                
+                // Insert into Uploads
+                create_upload($username, $mediaID, $ip);
+    
+                // Return all good
                 $result="0";
                 chmod($file_path, 0644);
             }

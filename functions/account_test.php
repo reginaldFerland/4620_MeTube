@@ -175,6 +175,20 @@ create_user("tester", "email@email.com", "password");
     else
         echo "failed";
 ?>
+<p><b> Test 25: get_uploads </b></p>
+<?php
+    if(get_uploads("tester") > -1)
+        echo "success";
+    else
+        echo "failed";
+?>
+<p><b> Test 26: get_uploads </b></p>
+<?php
+    if(get_uploads("test") == -1)
+        echo "success";
+    else
+        echo "failed";
+?>
 
 <p> Remove account </p>
 <?php remove_user("tester");?>

@@ -1,5 +1,5 @@
 <?php
-include_once('../mysqlClass.inc.php');
+include_once('mysqlClass.inc.php');
 
 function media_exists ($id) {
     $query = "select * from Media where mediaID='$id'";
@@ -88,7 +88,7 @@ function change_media_name($id, $name)
     if($name == "")
         return 4;
     // Change name
-    $update = "UPDATE Media SET name = '$name'";
+    $update = "UPDATE Media SET name = '$name' WHERE mediaID='$id'";
     $result = mysql_query($update);
     if($result)
         return 1;
@@ -106,7 +106,7 @@ function change_description($id, $desc)
     if($desc == "")
         return 4;
     // Change name
-    $update = "UPDATE Media SET description = '$desc'";
+    $update = "UPDATE Media SET description = '$desc' WHERE mediaID='$id'";
     $result = mysql_query($update);
     if($result)
         return 1;
