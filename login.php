@@ -22,7 +22,7 @@ if(isset($_POST['submit'])) {
         $login_error = "One or more fields are missing.";
     }
     else {
-        $check = password_check($_POST['username'],$_POST['password']); // Call functions from function.php
+        $check = password_check($_POST['username'],$_POST['password']); // Call functions from account_functions.php
         if($check==False) {
             $login_error = "Incorrect password or username.";
         }
