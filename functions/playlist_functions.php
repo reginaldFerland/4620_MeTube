@@ -66,4 +66,70 @@ function remove_playlist($id)
         die ("Could not delete from the database: <br />". mysql_error());      
 }
 
+function playlist_tag_exists($id, $tag)
+{
+    // Check playlist exists
+    if(!playlist_exists($id))
+        return 2;
+
+    // Query
+    $query = "SELECT * FROM Playlist_Tag WHERE playlistID = '$id' and tag = '$tag'";
+    $result = mysql_query($query);
+    if (!$result) {
+        die ("playlist_tag_exists() failed. Could not query the database: <br />".mysql_error());
+    }
+    else {
+        $row = mysql_fetch_assoc($result);
+        if($row == 0) {
+            return False; # playlis_tag does not exist
+        }
+        else {
+            return True; # playlist_tag exists
+        }
+    }
+}
+
+function add_playlist_tag($id, $tag)
+{
+    // Check playlist exists
+    if(!playlist_exists($id))
+        return 2;
+
+    // Check tag already on
+    if(playlist_tag_exists($id, $tag))
+        return 3;
+
+    // Add tag to playlist_tag
+    $insert = "INSERT INTO Playlist_Tag (playlistID, tag) values ('$id', '$tag')";
+    $result = mysql_query($insert);
+    if($result)
+        return 1;
+    else
+        die ("Could not insert into the database: <br />". mysql_error());      
+
+}
+
+function remove_playlist_tag($id, $tag)
+{
+    // Check playlist exists
+    if(!playlist_tag_exists($id, $tag))
+        return 2;
+
+    // Remove playlist_tag
+    $delete = "DELETE FROM Playlist_Tag WHERE playlistID ='$id' and tag = '$tag'";
+    
+}
+
+function get_playlist_tags($id)
+{
+    // Check playlist exists
+
+    // Search for all tags
+
+    // Return tags
+
+}
+
+
+
 ?>

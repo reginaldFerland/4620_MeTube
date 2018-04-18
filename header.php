@@ -10,6 +10,17 @@
         <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search">
         <button class="btn btn-success" type="submit">Search</button>
     </form>
+    
+    <!-- Test Dropdown -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="./categories.php">Categories</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="./channels.php">Channels</a>
+        </li>
+    </ul>
+    
 
     <!-- Determine if logged in -->
     <?php

@@ -5,6 +5,7 @@
     include_once("mysqlClass.inc.php");
     include_once("functions/media_functions.php");
     include_once("functions/comments_functions.php");
+    include_once("functions/account_functions.php");
 ?>  
 <html>
 <head>
@@ -19,37 +20,48 @@
 ?>
 <?php
 if(isset($_GET['id'])) {
-    $query = "SELECT * FROM Media WHERE mediaID='".$_GET['id']."'";
-    $result = mysql_query( $query );
-    $result_row = mysql_fetch_assoc($result);
+    $id = $_GET['id'];
+    $media_info = get_media_info($id);
+    $name = $media_info['name'];
+    $filepath = $media_info['path']; 
+    $type = $media_info['type'];
+    $views = $media_info['viewcount'];
+    $description = $media_info['description'];
+    if($description == NULL)
+        $description = "No description";
+    $user = $media_info['username'];
+    $upload_time = $media_info['upload_time'];
+    $likes = $media_info['likes'];
+
+    // Type info
+    if(substr($type,0,5)=="image")
+        $is_image = True;
+    else
+        $is_image = False;
+
+    $_SESSION['viewing'] = $id;
     
-    increment_views($_GET['id']);
-    update_media_timestamp($_GET['id']);
-    $filename=$result_row['name'];   ////0, 4, 2
-    $filepath=$result_row['path']; 
-    $type=$result_row['type'];
+    increment_views($id);
+    update_media_timestamp($id);
 ?>
-    <a href="<?php echo $result_row['path'];?>" target="_blank" download >Download</a>
+
+    <h1 class="text-center"> <?php echo $name;?></h1>
+    <h5 class="text-center"> Uploaded by: 
+        <a class="" href="./profile.php?username=<?php echo $user;?>"><?php echo $user;?></a>
+    </h5>
+
+    <div class="row">
 <?php
-    echo "\n Views:" . $result_row['viewcount'] . " ";
-
-    if(substr($type,0,5)=="image") //view image
+    if($is_image) //view image
     {
-        echo "Viewing Picture:";
-        echo $result_row['name'];
-        echo "<img src='".$filepath."'/>";
-        echo $result_row['description'];
-
+?>
+        <img class="mx-auto" src="<?php echo $filepath;?>"/>
+<?php
     }
     else //view movie
     {   
 ?>
-        <!-- <p>Viewing Video:<?php echo $result_row['type'].$result_row['username'];?></p> -->
-        <p>Viewing Video:<?php echo $result_row['path'];?></p>
-          
-        <video controls><source src="<?php echo $result_row['path']?>" type="<?php echo $result_row['type']?>"> </video>        
-
-              
+        <video controls><source src="<?php echo $filepath;?>" type="<?php echo $type;?>"> </video>        
 <?php
     }
 }
@@ -60,22 +72,62 @@ else
 <?php
 }
 ?>
+    </div>
+    <div class="row">
+        <p class="mx-auto">Views: <?php echo $views;?>
+        <a class="text-center" href="<?php echo $filepath;?>" target="_blank" download >Download</a>
+        <a class="" href="./like.php">Likes</a>: <?php echo $likes;?>
+        </p>
+    </div>
+    <div class="row">
+        <h5 class="text-center mx-auto"> Description </h5>
+    </div>
+    <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm"><p class="text-center"> <?php echo $description;?></p></div>
+        <div class="col-sm"></div>
+    </div>
 
 <!-- Comment section -->
 <hr>
 <h5 class="text-center"> Comments </h5>
 
+<div class="container">
 <?php
-    $comment_results = get_media_comments($_GET['id']);
+    $comment_results = get_media_comments($id);
     while($comment = mysql_fetch_assoc($comment_results))
     {
-    echo "Comment #" . $comment['commentID'] . " ";
-    echo $comment['username'] . "\t";
-    echo $comment['comment'] . "\n";
-
-    }
+    $userinfo = get_user_info($comment['username']);
+    $profileID = $userinfo['mediaID'];
+    $profile_info = get_media_info($profileID);
+    $profile_pic = $profile_info['path'];
 ?>
 
+<div class="row">
+<div class="col-sm-1">
+<div class="thumbnail">
+<img class="img-responsive user-photo" style="width:50px; height:50px" src="<?php echo $profile_pic;?>">
+</div><!-- /thumbnail -->
+</div><!-- /col-sm-1 -->
+
+<div class="col-sm-5">
+<div class="panel panel-default">
+<div class="panel-heading">
+<strong><?echo $comment['username'];?></strong> </div>
+<div class="panel-body">
+<?php echo $comment['comment'];?>
+</div><!-- /panel-body -->
+</div><!-- /panel panel-default -->
+</div><!-- /col-sm -->
+</div>
+
+<?php } ?>
+
+<!-- ADD A COMMENT -->
+<form class="form-group" action="comment.php" method="POST" enctype="multipart/form-data">
+    <textarea name="comment" class="form-control text-center">Add your own comment!</textarea>
+    <button class="btn btn-primary mx-auto" type="submit">Add</button>
+</form>
 
 <?php
     include('footer.php');

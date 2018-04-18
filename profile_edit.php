@@ -38,7 +38,7 @@ $profile_url = $profile_info["path"];
 
 <form action="update_profile.php" method="post" style="max-width:200px; margin: 20px" class="mx-auto">
     <div class="form-group">
-        <input type="text" name="profile" placeholder="pictureID, default 0">
+        <input type="text" name="profile" placeholder="pictureID, default 1">
     </div>
     <div class="form-group">
         <input type="text" name="name" placeholder="<?php echo $name;?>">
