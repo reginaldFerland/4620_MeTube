@@ -31,6 +31,10 @@ function create_comment($user, $id, $comment)
     if(!media_exists($id))
         return 3;
 
+    // Comment not empty
+    if($comment == NULL or $comment == "")
+        return 4;
+
     // Insert
     $insert = "INSERT INTO Comments (mediaID, username, comment)"
     . " VALUES ('$id', '$user', '$comment')";

@@ -31,7 +31,7 @@ session_start();
         <input name="name" type="text" placeholder="Name"/>
     </div>
     <div class="md-form">
-        <input name="description" type="text" placeholder="Description?"/>
+        <textarea name="description" type="text" placeholder="Description"></textarea>
     </div>
     <div class="md-form">
         <input name="tags" type="text" placeholder="dog, cat, mountians, ect"/>

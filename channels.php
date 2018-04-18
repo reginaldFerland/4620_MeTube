@@ -16,8 +16,10 @@ include_once("functions/media_functions.php");
 <?php
 // Header
 include("header.php");
-
-// Get all users
+?>
+<h1 class="text-center jumbotron mx-auto"> CHANNELS </h1>
+<?php
+//  Get all users
 $all_users = get_all_users();
 
 // Loop
@@ -26,9 +28,9 @@ while($channel = mysql_fetch_assoc($all_users))
     // Channel name
     $username = $channel['username'];
 ?>
-    <p class="text-center mx-auto">
+    <h1 class="text-center mx-auto">
         <a href="./profile.php?username=<?php echo $username;?>"><?php echo $username;?></a>
-    </p>
+    </h1>
 
 <?php
     // Get 5 most viewed from each

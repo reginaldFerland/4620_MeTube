@@ -125,7 +125,7 @@ else
 
 <!-- ADD A COMMENT -->
 <form class="form-group" action="comment.php" method="POST" enctype="multipart/form-data">
-    <textarea name="comment" class="form-control text-center">Add your own comment!</textarea>
+    <textarea name="comment" class="form-control text-center" placeholder="Add your own comment!"></textarea>
     <button class="btn btn-primary mx-auto" type="submit">Add</button>
 </form>
 
