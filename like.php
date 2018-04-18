@@ -4,7 +4,7 @@ session_save_path("./session");
 session_start();
  
 
-$id = urlencode($_SESSION['viewing']);
+$id = urlencode($_GET['id']);
 
 add_like($id);
 

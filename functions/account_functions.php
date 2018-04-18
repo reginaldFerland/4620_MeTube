@@ -270,10 +270,23 @@ function get_user_info($user)
     $query = "select * from Account where username='$user'";
     $result = mysql_query( $query );
     if (!$result) {
-        die ("get_uploadss() failed. Could not query the database: <br />".mysql_error());
+        die ("get_user_info() failed. Could not query the database: <br />".mysql_error());
     }
     else {
         return mysql_fetch_assoc($result);
+    }
+}
+
+function get_all_users()
+{
+    // Query
+    $query = "SELECT * FROM Account where 1 ORDER BY upload desc";
+    $result = mysql_query( $query );
+    if (!$result) {
+        die ("get_all_users() failed. Could not query the database: <br />".mysql_error());
+    }
+    else {
+        return $result;
     }
 }
 

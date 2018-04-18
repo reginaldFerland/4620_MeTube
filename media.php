@@ -76,7 +76,7 @@ else
     <div class="row">
         <p class="mx-auto">Views: <?php echo $views;?>
         <a class="text-center" href="<?php echo $filepath;?>" target="_blank" download >Download</a>
-        <a class="" href="./like.php">Likes</a>: <?php echo $likes;?>
+        <a class="" href="./like.php?id=<?php echo $id;?>">Likes</a>: <?php echo $likes;?>
         </p>
     </div>
     <div class="row">

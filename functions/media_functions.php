@@ -197,7 +197,7 @@ function get_media_info($id)
         return -1;
 
     // Return results
-    $query = "select * from Media INNER JOIN Upload on Media.mediaID =  Upload.mediaID where Media.mediaID='$id'";
+    $query = "select * from Media INNER JOIN Upload on Media.mediaID = Upload.mediaID where Media.mediaID='$id'";
     $result = mysql_query( $query );
     if (!$result) {
         die ("get_media_info() failed. Could not query the database: <br />".mysql_error());

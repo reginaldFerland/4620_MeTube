@@ -18,7 +18,7 @@
             if($description == NULL) {
                 $description = "No description";
             }
-            $description = substr($description, 0, 20);
+            $description = substr($description, 0, 21);
             if(strpos($type, "video") !== False){
                 // Video thumbnail
                 $filenpath = "site/thumbnail.png";
@@ -35,7 +35,7 @@
            <p class="card-text"> <?php echo $description;?> </p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Like</button>
+                    <a type="button" class="btn btn-sm btn-outline-secondary" href="like.php?id=<?php echo $mediaid;?>">Like</a>
                 </div> 
                 <small class="text-muted"><?php echo substr($time_created,0,10);?></small>
             </div>
