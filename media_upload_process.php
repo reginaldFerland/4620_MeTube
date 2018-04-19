@@ -3,6 +3,7 @@ session_save_path("./session");
 session_start();
 include_once "functions/upload_functions.php";
 include_once "functions/account_functions.php";
+include_once "functions/category_functions.php";
 
 /******************************************************
 *
@@ -63,7 +64,22 @@ if(!file_exists($dirfile))
                 
                 // Insert into Uploads
                 create_upload($username, $mediaID, $ip);
-    
+
+                // Upload tags
+
+
+                // Upload categories
+                if(isset($_POST["comedy"]))
+                    add_media_category($mediaID, "comedy");
+                if(isset($_POST["education"]))
+                    add_media_category($mediaID, "education");
+                if(isset($_POST["gaming"]))
+                    add_media_category($mediaID, "gaming");
+                if(isset($_POST["nature"]))
+                    add_media_category($mediaID, "nature");
+                if(isset($_POST["music"]))
+                    add_media_category($mediaID, "music");
+                
                 // Return all good
                 $result="0";
                 chmod($file_path, 0644);

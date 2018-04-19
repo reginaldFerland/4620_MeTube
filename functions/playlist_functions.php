@@ -33,6 +33,51 @@ function create_playlist($owner, $name, $description=NULL)
         die ("Could not insert into the database: <br />". mysql_error());      
 }
 
+function add_media_playlist($playlistID, $mediaID)
+{
+    // Check playlist exists
+    if(!playlist_exists($playlistID))
+        return 2;
+
+    // Check media exists
+    if(!media_exists($mediaID))
+        return 3;
+
+    // Check if media in playlist
+    if(media_in_playlist($playlistID, $mediaID))
+        return 4;
+
+    // Insert
+    $insert = "INSERT INTO Playlist_Media (playlistID, mediaID) VALUES ('$playlistID', '$mediaID')";
+
+    // Return
+    $result = mysql_query($insert);
+    if($result)
+        return 1;
+    else
+        die ("Could not insert into the database: <br />". mysql_error());      
+
+}
+
+function media_in_playlist($playlistID, $mediaID)
+{
+    // Query
+    $query = "SELECT * from Playlist_Media where playlistID ='$playlistID' and mediaID = '$mediaID'";
+    $result = mysql_query($query);
+    if (!$result) {
+        die ("media_in_playlist() failed. Could not query the database: <br />".mysql_error());
+    }
+    else {
+        $row = mysql_fetch_assoc($result);
+        if($row == 0) {
+            return False; # does not exist
+        }
+        else {
+            return True; # exists
+        }
+    }
+}
+
 function playlist_exists($id)
 {
     $query = "SELECT * from Playlist where playlistID ='$id'";
@@ -117,19 +162,90 @@ function remove_playlist_tag($id, $tag)
 
     // Remove playlist_tag
     $delete = "DELETE FROM Playlist_Tag WHERE playlistID ='$id' and tag = '$tag'";
-    
+    $result = mysql_query($delete);
+    if($result) {
+        return 1;
+    }
+    else 
+        die ("Could not delete from the database: <br />". mysql_error());      
+
 }
 
 function get_playlist_tags($id)
 {
     // Check playlist exists
+    if(!playlist_tag_exists($id, $tag))
+        return 2;
 
     // Search for all tags
+    $query = "SELECT * FROM Playlist_Tag WHERE playlistID = '$id'";
 
     // Return tags
-
+    $result = mysql_query( $query );
+    if (!$result) {
+        die ("get_playlist_tags() failed. Could not query the database: <br />".mysql_error());
+    }
+    else {
+        return $result;
+    }
 }
 
+function get_user_playlists($username)
+{
+    // Check user exists
+    if(!user_exists($username))
+        return -1;
 
+    // Search for all tags
+    $query = "SELECT * FROM Playlist WHERE owner = '$username'";
 
+    // Return tags
+    $result = mysql_query( $query );
+    if (!$result) {
+        die ("get_playlist_tags() failed. Could not query the database: <br />".mysql_error());
+    }
+    else {
+        return $result;
+    }
+}
+
+function get_media_from_playlist($id)
+{
+    // Check exists
+    if(!playlist_exists($id))
+        return -1;
+
+    // Search 
+    $query = "SELECT * FROM Media INNER JOIN Playlist_Media on Media.mediaID = Playlist_Media.mediaID INNER JOIN Playlist on Playlist.playlistID = Playlist_Media.playlistID WHERE Playlist.playlistID = '$id'";
+
+    // Return 
+    $result = mysql_query( $query );
+    if (!$result) {
+        die ("get_media_from_playlists() failed. Could not query the database: <br />".mysql_error());
+    }
+    else {
+        return $result;
+    }
+}
+
+function get_favorite_id($user)
+{
+    // Check user exists
+    if(!user_exists($user))
+        return -1;
+
+    // Search
+    $query = "SELECT * FROM Playlist where name = 'Favorites' and owner = '$user'";
+
+    // Return 
+    $result = mysql_query( $query );
+    if (!$result) {
+        die ("get_favorite_id() failed. Could not query the database: <br />".mysql_error());
+    }
+    else {
+        $row = mysql_fetch_assoc($result);
+        return $row['playlistID'];
+    }
+
+}
 ?>

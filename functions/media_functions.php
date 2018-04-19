@@ -205,7 +205,6 @@ function get_media_info($id)
     else {
         return mysql_fetch_assoc($result);
     }
-
 }
 
 

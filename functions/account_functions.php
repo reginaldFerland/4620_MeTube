@@ -1,6 +1,7 @@
 <?php
 include_once("mysqlClass.inc.php");
 include_once("blocked_user_functions.php");
+include_once("playlist_functions.php");
 
 function user_exists ($username) {
     $query = "select * from Account where username='$username'";
@@ -51,7 +52,9 @@ function create_user ($username, $email, $password)
     $query = "insert into Account (username, email, password, join_date) values ('$username','$email','$password','$date')";
     $insert = mysql_query( $query );
     if($insert)
-        return 1;
+    {
+        create_playlist($username, "Favorites");
+    }
     else
         die ("Could not insert into the database: <br />". mysql_error());      
  

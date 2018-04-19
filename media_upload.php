@@ -19,25 +19,46 @@ session_start();
     include('header.php');
 ?>
 
-<div class="col-4 col-offset-4" style="max-width: 500px; margin: 20px auto">
+<div class="col-sm-4 mx-auto" style="margin:20px">
 <form class="form-group" method="post" action="media_upload_process.php" enctype="multipart/form-data" >
  
     <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
-        Add a Media: <label style="color:#663399"><em> (Each file limit 10M)</em></label><br/>
+        Upload Media: <label style="color:#663399"><em> (Each file limit 10M)</em></label><br/>
     <div class="md-form">
-        <input name="file" type="file" size="50" />
+        <input class="form-control-file btn btn-primary" name="file" type="file" size="50" />
     </div>
     <div class="md-form">
-        <input name="name" type="text" placeholder="Name"/>
+        <input class="form-control" name="name" type="text" placeholder="Name"/>
     </div>
     <div class="md-form">
-        <textarea name="description" type="text" placeholder="Description"></textarea>
+        <textarea class="form-control" name="description" type="text" placeholder="Description"></textarea>
+    </div>
+    <div class="form-check-inline mx-auto">
+        <!-- Comedy -->
+        <input class="form-check-input" type="checkbox" name="comedy">
+        <label class="form-check-label">Comedy </label>
+
+        <!-- Education -->
+        <input class="form-check-input" type="checkbox" name="education">
+        <label class="form-check-label">Education</label>
+
+        <!-- Gaming -->
+        <input class="form-check-input" type="checkbox" name="gaming">
+        <label class="form-check-label">Gaming</label>
+
+        <!-- Nature -->
+        <input class="form-check-input" type="checkbox" name="nature">
+        <label class="form-check-label">Nature</label>
+
+        <!-- Music -->
+        <input class="form-check-input" type="checkbox" name="music">
+        <label class="form-check-label">Music</label>
     </div>
     <div class="md-form">
-        <input name="tags" type="text" placeholder="dog, cat, mountians, ect"/>
+        <input class="form-control" name="tags" type="text" placeholder="Tags: dog, cat, mountians, ect"/>
     </div>
     <div class="md-form">
-        <input value="Upload" name="submit" type="submit" />
+        <input class="btn btn-primary mx-auto" value="Upload" name="submit" type="submit" />
     </div>
  
 </form>
