@@ -17,6 +17,8 @@
 
     if(!user_exists($username))
         header("Location: index.php");
+
+    $LIMIT = 4;    
 ?>
 
 <!-- Include same header across website -->
@@ -41,7 +43,6 @@ while($playlist = mysql_fetch_assoc($user_playlists))
 <?php
     // Get 5 most viewed from each
     $result = get_media_from_playlist($playlist['playlistID']);
-    $LIMIT = 5;    
     include("display_playlist.php");
 }
 ?>

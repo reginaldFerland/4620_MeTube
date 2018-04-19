@@ -53,40 +53,37 @@ $profile_url = $profile_info["path"];
 <!-- Header -->
 <?php include('header.php'); ?>
 
+<h1 class="jumbotron mx-auto text-center">Welcome to <?php echo $username?>'s page</h1>
+
 <!-- Top Row -->
 <div class="row">
-    <!-- Picture goes here -->
-    <div class="media">
-        <div class="media-left">
-            <img class="img-thumbnail" src="<?php echo $profile_url;?>" width="250">
-        </div>
+    <!--Profile Pic-->
+    <div class="col-4 text-center">
+        <img class="mx-auto img-thumbnail" style="width:250px;height:250px" src="<?php echo $profile_url;?>" alt="Profile Picture">
 
-        <div class="media-body">
-            <!-- Title row -->
-            <h4 class="media-heading">Welcome to <?php echo $username?>'s page</h4>
-            <!-- Real Name goes here -->
-            <p><?php if($name != "NULL") { echo $name;}?> 
-            <!-- User Join Date -->
-            Joined on <?php echo $join_date;?>. 
-            <?php echo $username;?> has uploaded <?php echo $uploads;?> files.</p>
-            <!-- About section -->
-            <p><?php echo $about;?></p>
-        </div>
-        <div class="media-right mx-auto">
-            <h4 class=media-heading"><?php echo $username;?>'s Friends</h4>
-            <?php
-                $query = "SELECT * from Contact where username='$username' LIMIT 5";
-                $results = mysql_query($query);
-                while ($results_row = mysql_fetch_assoc($results)) { $friend = $results_row['friend']; ?>
-                    <p><a href="./profile.php?username=<?php echo $friend;?>"><?php echo $friend;?></a></p>
-            <?php }?>
-        </div>
     </div>
-    <?php if($self) {?> <div> <a href="./profile_edit.php" class="btn btn-primary active">Edit</a> </div><?php }
-    else { ?>
-        <div> <a href="./add_friend.php?user=<?php echo $_SESSION['username'];?>&friend=<?php echo $username;?>" class="btn-primary active">Add Friend</a> </div>
-    <?php } ?>
+    <!-- About area -->
+    <div class="col-4 text-center">
+        <h2 class=""><b><?php echo $name?></b></h2>
+        <p class="">Joined: <?php echo substr($join_date,0,10);?></p>
+        <p class=""><?php echo $about;?></p>
+    </div>
+    <!-- Buttons -->
+    <div class="col-3 text-right">
+
+    <?php 
+        if($self) {?> 
+            <div> <a href="./profile_edit.php" class="btn btn-primary active">Edit</a> </div>
+        <?php }
+        else { ?>
+            <div> 
+                <a href="./add_friend.php?user=<?php echo $_SESSION['username'];?>&friend=<?php echo $username;?>" class="btn-primary active">Add Friend</a> 
+            </div>
+        <?php } ?>
+    </div>
 </div>
+
+<h1 class="mx-auto text-center"><?php echo $username;?> has uploaded <?php echo $uploads;?> files!</h1>
 
 <!-- Browse uploaded files -->
 <?php include('user_browse.php');?>

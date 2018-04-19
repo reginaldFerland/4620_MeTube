@@ -36,32 +36,41 @@ $profile_url = $profile_info["path"];
 
 <?php include('header.php');?>
 
-<form action="update_profile.php" method="post" style="max-width:200px; margin: 20px" class="mx-auto">
+
+<div class="col-sm-4 mx-auto" style="margin:20px">
+<form action="update_profile.php" method="post" class="mx-auto form-group">
     <div class="form-group">
+        PictureID
         <input type="text" name="profile" placeholder="pictureID, default 1">
     </div>
     <div class="form-group">
+        <label> Name </label>
         <input type="text" name="name" placeholder="<?php echo $name;?>">
     </div>
     <div class="form-group">
+        <label> Email </label>
         <input type="text" name="email" placeholder="<?php echo $email;?>">
     </div>
     <div class="form-group">
+        <label> About </label>
         <textarea type="text" name="about" placeholder="<?php echo $about;?>"></textarea>
     </div>
     <div class="form-group">
+        <label> New Password </label>
         <input  type="password" name="passowrd1" placeholder="New Password">
     </div>
     <div class="form-group">
+        <label> Repeat New Password </label>
         <input  type="password" name="passowrd2" placeholder="Repeat New Password">
     </div>
     <div class="form-group">
+        <label> Current Password </label>
         <input  type="password" name="password" placeholder="Current Password">
     </div>
     <div class="form-group">
         <input name="submit" type="submit" value="Submit">
     </div>
 </form>
-
+</div>
 
 <?php include('footer.php');?>

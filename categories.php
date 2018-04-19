@@ -10,8 +10,9 @@
     session_save_path("./session");
     session_start();
     include("header.php");
-    include_once("functions/category_functions.php")
+    include_once("functions/category_functions.php");
 
+    $LIMIT = 4;
 ?>
 
 <h1 class="text-center jumbotron mx-auto"> CATEGORIES </h1>
@@ -21,7 +22,6 @@
 <?php
     $result = get_all_media_from_category("comedy");
     {
-        $LIMIT = 5;
         include("display_category.php");
     }   
 ?>
@@ -31,7 +31,6 @@
 <?php
     $result = get_all_media_from_category("education");
     {
-        $LIMIT = 5;
         include("display_category.php");
     }   
 ?>
@@ -42,7 +41,6 @@
 <?php
     $result = get_all_media_from_category("gaming");
     {
-        $LIMIT = 5;
         include("display_category.php");
     }   
 ?>
@@ -53,7 +51,6 @@
 <?php
     $result = get_all_media_from_category("nature");
     {
-        $LIMIT = 5;
         include("display_category.php");
     }   
 ?>
@@ -63,7 +60,6 @@
 <?php
     $result = get_all_media_from_category("music");
     {
-        $LIMIT = 5;
         include("display_category.php");
     }   
 ?>

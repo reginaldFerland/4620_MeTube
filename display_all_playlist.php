@@ -23,7 +23,7 @@
             }
     ?>
 
-<div class="col md-4"> 
+<div class="col-3"> 
     <div class="card mb-4 box-shadow">
         <a href="media.php?id=<?php echo $mediaid;?>">
         <img class="card-img-top" style="height:200px" src="<?php echo $filenpath;?>" alt="Card image">
