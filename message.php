@@ -13,6 +13,7 @@
     include_once("functions/account_functions.php");
     include_once("functions/contact_functions.php");
     include_once("functions/message_functions.php");
+    include_once("functions/media_functions.php");
 
     $username = $_SESSION['username'];
 
@@ -46,11 +47,15 @@ $conversation = get_conversation($username, $friend);
 
 while($message = mysql_fetch_assoc($conversation))
 {
+$sender = $message['sender'];
+$mediaID = get_user_info($sender)['mediaID'];
+$sender_picture = get_media_info($mediaID);
+$picture_path = $sender_picture['path'];
 ?>
     <div class="row">
     <div class="col-sm-1">
         <div class="thumbnail">
-            <img class="img-responsive user-photo" style="width:50px; height:50px" src="<?php echo "upload/user/4.jpg";?>">
+            <img class="img-responsive user-photo" style="width:50px; height:50px" src="<?php echo $picture_path;?>">
         </div><!-- /thumbnail -->
     </div><!-- /col-sm-1 -->
 
