@@ -7,11 +7,11 @@ function create_playlist($owner, $name, $description=NULL)
 {
     // Check Owner exists
     if(!user_exists($owner))
-        return 2;
+        return -2;
 
     // Check name not null
     if($name == NULL or $name == "")
-        return 3;
+        return -3;
 
     // Create playlist
     $insert = "INSERT INTO Playlist (owner, name, creation_time, last_access";
@@ -28,7 +28,7 @@ function create_playlist($owner, $name, $description=NULL)
     // Upload
     $result = mysql_query($insert);
     if($result)
-        return 1;
+        return mysql_insert_id();
     else
         die ("Could not insert into the database: <br />". mysql_error());      
 }
@@ -216,7 +216,8 @@ function get_media_from_playlist($id)
         return -1;
 
     // Search 
-    $query = "SELECT * FROM Media INNER JOIN Playlist_Media on Media.mediaID = Playlist_Media.mediaID INNER JOIN Playlist on Playlist.playlistID = Playlist_Media.playlistID WHERE Playlist.playlistID = '$id'";
+    $query = "SELECT Media.name, Media.mediaID, Media.type, Media.path, Media.description, Media.viewcount, Media.last_access "
+    ." FROM Media INNER JOIN Playlist_Media on Media.mediaID = Playlist_Media.mediaID INNER JOIN Playlist on Playlist.playlistID = Playlist_Media.playlistID WHERE Playlist.playlistID = '$id'";
 
     // Return 
     $result = mysql_query( $query );
@@ -246,6 +247,24 @@ function get_favorite_id($user)
         $row = mysql_fetch_assoc($result);
         return $row['playlistID'];
     }
-
 }
+
+function get_playlist_info($id)
+{
+    // Check user exists
+    if(!playlist_exists($id))
+        return -1;
+    
+    // Query 
+    $query = "select * from Playlist where playlistID = '$id'";
+    $result = mysql_query( $query );
+    if (!$result) {
+        die ("get_playlist_info() failed. Could not query the database: <br />".mysql_error());
+    }
+    else {
+        return mysql_fetch_assoc($result);
+    }
+}
+
+
 ?>

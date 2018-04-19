@@ -80,6 +80,9 @@ else
         </p>
     </div>
     <div class="row">
+        <a class="mx-auto text-center" href="./add_playlist.php?id=<?php echo $id;?>"> ADD TO PLAYLIST </a>
+    </div>
+    <div class="row">
         <h5 class="text-center mx-auto"> Description </h5>
     </div>
     <div class="row">
