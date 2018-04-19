@@ -36,8 +36,9 @@ function send_message($sender, $reciever, $message)
         return 4;
 
     // Insert
+    $date = date('c');
     $insert = "INSERT INTO Messages (sender, reciever, message, date)"
-    . " VALUES ('$sender', '$reciever', '$message')";
+    . " VALUES ('$sender', '$reciever', '$message', '$date')";
     $result = mysql_query( $insert );
     if($result)
         return 1;
@@ -89,7 +90,7 @@ function get_conversation($user, $user2)
 
     // Collect results
     $query = "SELECT * FROM Messages where (sender = '$user' and reciever = '$user2')"
-    . "or (sender = '$user2' and reciever = '$user') order by messageID asc";
+    . "or (sender = '$user2' and reciever = '$user') order by messageID DESC";
 
     // Return results
     $result =  mysql_query($query);
@@ -117,5 +118,26 @@ function get_conversation_list($user)
 
 }
 
+function get_last_message($user, $user2)
+{
+    // Check user exists
+    if(!user_exists($user))
+        return -1;
+
+    // Check user2 exists
+    if(!user_exists($user2))
+        return -2;
+
+    // Query
+    $query = "SELECT * FROM Messages where (sender = '$user' and reciever = '$user2')"
+    . "or (sender = '$user2' and reciever = '$user') order by messageID DESC LIMIT 1";
+
+    // Return results
+    $result =  mysql_query($query);
+    if($result)
+        return mysql_fetch_assoc($result)['message'];
+    else
+        die("Could not get conversation: <br />". mysql_error());
+}
 ?>
 

@@ -89,13 +89,11 @@ function get_friends($user)
 
     // Query Database
     $query = "SELECT * FROM Contact where username = '$user'";
-    $result = mysql_query($drop);
+    $result = mysql_query($query);
     if($result)
         return $result;
     else
         die ("Could not search database: <br />" .mysql_error());
-
-
 }
 
 ?>
