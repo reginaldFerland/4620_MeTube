@@ -1,5 +1,5 @@
 <?php
-    include_once "function.php";
+    include_once "upload_errors.php";
 ?>
 <!-- browse categories -->
 

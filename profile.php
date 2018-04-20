@@ -5,6 +5,7 @@ session_save_path("./session");
 session_start(); 
 include_once("functions/account_functions.php");
 include_once("functions/media_functions.php");
+include_once("functions/contact_functions.php");
 # Check if user is viewing own page
 if($_SESSION['username'] == $_GET['username']){
     $self = True;
@@ -12,6 +13,12 @@ if($_SESSION['username'] == $_GET['username']){
 else {
     $self = False;
 }
+
+# Check if user is friends with page
+if(is_friends($_SESSION['username'], $_GET['username']))
+    $are_friends = True;
+else
+    $are_friends = False;
 
 # Check that this is valid user page
 $username = $_GET['username'];
@@ -77,7 +84,11 @@ $profile_url = $profile_info["path"];
         <?php }
         else { ?>
             <div> 
-                <a href="./add_friend.php?user=<?php echo $_SESSION['username'];?>&friend=<?php echo $username;?>" class="btn-primary active">Add Friend</a> 
+                <?php if($are_friends) { ?>
+                    <a href="./remove_friend.php?user=<?php echo $_SESSION['username'];?>&friend=<?php echo $username;?>" class="btn-primary active">Remove Friend</a> 
+                <?php } else { ?>
+                    <a href="./add_friend.php?user=<?php echo $_SESSION['username'];?>&friend=<?php echo $username;?>" class="btn-primary active">Add Friend</a> 
+                <?php } ?>
             </div>
         <?php } ?>
     </div>
