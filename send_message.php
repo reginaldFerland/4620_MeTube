@@ -10,7 +10,5 @@ include_once("functions/message_functions.php");
 
 $result = send_message($_SESSION['username'], $reciever, $message);
 
-file_put_contents("Log.log", $result);
-
 header("Location: ./message.php?friend=$reciever");
 ?>
