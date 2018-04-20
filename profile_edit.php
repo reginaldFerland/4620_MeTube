@@ -64,6 +64,10 @@ $profile_url = $profile_info["path"];
         <input  type="password" name="passowrd2" placeholder="Repeat New Password">
     </div>
     <div class="form-group">
+        <input class="form-check-input" type="checkbox" name="delete">
+        <label class="form-check-label">DELETE ACCOUNT: USE WITH CARE</label>
+    </div>
+    <div class="form-group">
         <label> Current Password </label>
         <input  type="password" name="password" placeholder="Current Password">
     </div>

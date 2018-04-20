@@ -56,7 +56,13 @@ else
             change_password($username, $new_password);
         }
 
-        header("Location: profile.php?username=".$username);
+        if(isset($_REQUEST['delete']))
+        {
+            remove_user($username);
+            header("Location: logout.php");
+        }
+        else
+            header("Location: profile.php?username=".$username);
 
         return 0;
     }
