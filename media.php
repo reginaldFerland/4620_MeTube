@@ -6,6 +6,10 @@
     include_once("functions/media_functions.php");
     include_once("functions/comments_functions.php");
     include_once("functions/account_functions.php");
+    if(isset($_SESSION['username']))
+        $logged_in = True; 
+    else
+        $logged_in = False;
 ?>  
 <html>
 <head>
@@ -43,8 +47,13 @@ if(isset($_GET['id'])) {
     
     increment_views($id);
     update_media_timestamp($id);
+    if($logged_in)
+    {
     if($user == $_SESSION['username'])
         $is_mine = True;
+    else
+        $is_mine = False;
+    }
     else
         $is_mine = False;
 ?>
@@ -133,10 +142,12 @@ else
 <?php } ?>
 
 <!-- ADD A COMMENT -->
+<?php if($logged_in) { ?>
 <form class="form-group" action="comment.php" method="POST" enctype="multipart/form-data">
     <textarea name="comment" class="form-control text-center" placeholder="Add your own comment!"></textarea>
     <button class="btn btn-primary mx-auto" type="submit">Add</button>
 </form>
+<?php } ?>
 
 <?php
     include('footer.php');

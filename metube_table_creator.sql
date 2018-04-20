@@ -57,32 +57,13 @@ CREATE TABLE `Upload` (
     )
 );
 
-CREATE TABLE `Tag` (
-    `tagID` int  NOT NULL auto_increment,
-    `tag` text  NOT NULL ,
-    PRIMARY KEY (
-        `tagID`
-    ),
-    CONSTRAINT `uc_Tag_tag` UNIQUE (
-        `tagID`
-    )
-);
-
 CREATE TABLE `Media_Tag` (
-    `tagID` int  NOT NULL ,
+    `tag` text  NOT NULL ,
     `mediaID` int  NOT NULL 
 );
 
-CREATE TABLE `Categories` (
-    `categoryID` int  NOT NULL auto_increment ,
-    `category` text  NOT NULL ,
-    PRIMARY KEY (
-        `categoryID`
-    )
-);
-
 CREATE TABLE `Media_Categories` (
-    `catID` int  NOT NULL ,
+    `categories` text  NOT NULL ,
     `mediaID` int  NOT NULL 
 );
 
@@ -100,12 +81,18 @@ CREATE TABLE `Playlist` (
 
 CREATE TABLE `Playlist_Tag` (
     `playlistID` int  NOT NULL ,
-    `tagID` int  NOT NULL 
+    `tag` text  NOT NULL 
 );
 
 CREATE TABLE `Playlist_Categories` (
     `playlistID` int  NOT NULL ,
-    `catID` int  NOT NULL 
+    `categories` text  NOT NULL 
+);
+
+CREATE TABLE `Playlist_Media` (
+    `playlistID` int NOT NULL,
+    `mediaID` int NOT NULL
+
 );
 
 CREATE TABLE `Comments` (
@@ -150,14 +137,8 @@ REFERENCES `Account` (`username`) ON DELETE CASCADE;
 ALTER TABLE `Upload` ADD CONSTRAINT `fk_Upload_mediaID` FOREIGN KEY(`mediaID`)
 REFERENCES `Media` (`mediaID`) ON DELETE CASCADE;
 
-ALTER TABLE `Media_Tag` ADD CONSTRAINT `fk_Media_Tag_tagID` FOREIGN KEY(`tagID`)
-REFERENCES `Tag` (`tagID`) ON DELETE CASCADE;
-
 ALTER TABLE `Media_Tag` ADD CONSTRAINT `fk_Media_Tag_mediaID` FOREIGN KEY(`mediaID`)
 REFERENCES `Media` (`mediaID`) ON DELETE CASCADE;
-
-ALTER TABLE `Media_Categories` ADD CONSTRAINT `fk_Media_Categories_catID` FOREIGN KEY(`catID`)
-REFERENCES `Categories` (`categoryID`) ON DELETE CASCADE;
 
 ALTER TABLE `Media_Categories` ADD CONSTRAINT `fk_Media_Categories_mediaID` FOREIGN KEY(`mediaID`)
 REFERENCES `Media` (`mediaID`) ON DELETE CASCADE;
@@ -168,14 +149,14 @@ REFERENCES `Account` (`username`) ON DELETE CASCADE;
 ALTER TABLE `Playlist_Tag` ADD CONSTRAINT `fk_Playlist_Tag_playlistID` FOREIGN KEY(`playlistID`)
 REFERENCES `Playlist` (`playlistID`) ON DELETE CASCADE;
 
-ALTER TABLE `Playlist_Tag` ADD CONSTRAINT `fk_Playlist_Tag_tagID` FOREIGN KEY(`tagID`)
-REFERENCES `Tag` (`tagID`) ON DELETE CASCADE;
-
 ALTER TABLE `Playlist_Categories` ADD CONSTRAINT `fk_Playlist_Categories_playlistID` FOREIGN KEY(`playlistID`)
 REFERENCES `Playlist` (`playlistID`) ON DELETE CASCADE;
 
-ALTER TABLE `Playlist_Categories` ADD CONSTRAINT `fk_Playlist_Categories_catID` FOREIGN KEY(`catID`)
-REFERENCES `Categories` (`categoryID`) ON DELETE CASCADE;
+ALTER TABLE `Playlist_Media` ADD CONSTRAINT `fk_Playlist_Media_playlistID` FOREIGN KEY(`playlistID`)
+REFERENCES `Playlist` (`playlistID`) ON DELETE CASCADE;
+
+ALTER TABLE `Playlist_Media` ADD CONSTRAINT `fk_Playlist_Media_mediaID` FOREIGN KEY(`mediaID`)
+REFERENCES `Media` (`mediaID`) ON DELETE CASCADE;
 
 ALTER TABLE `Comments` ADD CONSTRAINT `fk_Comments_mediaID` FOREIGN KEY(`mediaID`)
 REFERENCES `Media` (`mediaID`) ON DELETE CASCADE;
