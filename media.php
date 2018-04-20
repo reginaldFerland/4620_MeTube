@@ -64,7 +64,7 @@ if(isset($_GET['id'])) {
     else //view movie
     {   
 ?>
-        <video controls><source src="<?php echo $filepath;?>" type="<?php echo $type;?>"> </video>        
+        <video class="text-center mx-auto" controls><source src="<?php echo $filepath;?>" type="<?php echo $type;?>"> </video>        
 <?php
     }
 }
