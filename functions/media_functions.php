@@ -207,6 +207,58 @@ function get_media_info($id)
     }
 }
 
+function get_most_viewed()
+{
+    // Return results
+    $query = "select * from Media INNER JOIN Upload on Media.mediaID = Upload.mediaID ORDER BY Media.viewcount DESC";
+    $result = mysql_query( $query );
+    if (!$result) {
+        die ("get_most_viewed() failed. Could not query the database: <br />".mysql_error());
+    }
+    else {
+        return $result;
+    }
+}
+
+function get_recent_uploads()
+{
+    // Return results
+    $query = "select * from Media INNER JOIN Upload on Media.mediaID = Upload.mediaID ORDER BY Upload.upload_time DESC";
+    $result = mysql_query( $query );
+    if (!$result) {
+        die ("get_most_viewed() failed. Could not query the database: <br />".mysql_error());
+    }
+    else {
+        return $result;
+    }
+}
+
+function get_recent_viewed()
+{
+    // Return results
+    $query = "select * from Media INNER JOIN Upload on Media.mediaID = Upload.mediaID ORDER BY Media.last_access DESC";
+    $result = mysql_query( $query );
+    if (!$result) {
+        die ("get_most_viewed() failed. Could not query the database: <br />".mysql_error());
+    }
+    else {
+        return $result;
+    }
+}
+
+function get_user_most_viewed($user)
+{
+    // Return results
+    $query = "select * from Media INNER JOIN Upload on Media.mediaID = Upload.mediaID WHERE Upload.username='$user' ORDER BY Media.viewcount DESC";
+    $result = mysql_query( $query );
+    if (!$result) {
+        die ("get_most_viewed() failed. Could not query the database: <br />".mysql_error());
+    }
+    else {
+        return $result;
+    }
+}
+
 
 ?>
 

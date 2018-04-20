@@ -17,7 +17,7 @@
 
 <h1 class="text-center jumbotron mx-auto"> CATEGORIES </h1>
 
-<h1 class="text-center"> Comedy </h1>
+<h1 class="text-center"><a href="./view_all_category.php?name=comedy"> Comedy </a></h1>
 
 <?php
     $result = get_all_media_from_category("comedy");
@@ -26,7 +26,7 @@
     }   
 ?>
 
-<h1 class="text-center"> Education </h1>
+<h1 class="text-center"> <a href="./view_all_category.php?name=education">Education </a></h1>
 
 <?php
     $result = get_all_media_from_category("education");
@@ -36,7 +36,7 @@
 ?>
 
 
-<h1 class="text-center"> Gaming </h1>
+<h1 class="text-center"> <a href="./view_all_category.php?name=gaming">Gaming </a></h1>
 
 <?php
     $result = get_all_media_from_category("gaming");
@@ -46,7 +46,7 @@
 ?>
 
 
-<h1 class="text-center"> Nature </h1>
+<h1 class="text-center"><a href="./view_all_category.php?name=nature"> Nature </a></h1>
 
 <?php
     $result = get_all_media_from_category("nature");
@@ -55,7 +55,7 @@
     }   
 ?>
 
-<h1 class="text-center"> Music </h1>
+<h1 class="text-center"><a href="./view_all_category.php?name=music"> Music </a></h1>
 
 <?php
     $result = get_all_media_from_category("music");

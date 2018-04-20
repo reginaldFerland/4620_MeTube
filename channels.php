@@ -33,8 +33,10 @@ while($channel = mysql_fetch_assoc($all_users))
     </h1>
 
 <?php
-    // Get 5 most viewed from each
-    include("user_browse.php");
+    // Get 4 most viewed from each
+    $result = get_user_most_viewed($username);
+    $LIMIT = 4;
+    include("display_category.php");
 }
 
 include("footer.php");
