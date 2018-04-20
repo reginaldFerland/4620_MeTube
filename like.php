@@ -11,6 +11,12 @@ $favorites = get_favorite_id($_SESSION['username']);
 // Add id to favorites list, if successful add like
 if(add_media_playlist($favorites, $id) == 1)
     add_like($id);
+else
+{
+    remove_media_playlist($favorites, $id);
+    remove_like($id);
+
+}
 
 
 header("Location: ./media.php?id=$id");

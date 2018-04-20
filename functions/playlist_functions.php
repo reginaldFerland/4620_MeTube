@@ -59,6 +59,32 @@ function add_media_playlist($playlistID, $mediaID)
 
 }
 
+function remove_media_playlist($playlistID, $mediaID)
+{
+    // Check playlist exists
+    if(!playlist_exists($playlistID))
+        return 2;
+
+    // Check media exists
+    if(!media_exists($mediaID))
+        return 3;
+
+    // Check if media in playlist
+    if(!media_in_playlist($playlistID, $mediaID))
+        return 4;
+
+    // delete
+    $delete = "DELETE FROM Playlist_Media WHERE playlistID ='$playlistID' and mediaID = '$mediaID'";
+
+    // Return
+    $result = mysql_query($delete);
+    if($result)
+        return 1;
+    else
+        die ("Could not delete from the database: <br />". mysql_error());      
+
+}
+
 function media_in_playlist($playlistID, $mediaID)
 {
     // Query
