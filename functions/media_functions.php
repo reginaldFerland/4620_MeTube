@@ -207,6 +207,23 @@ function get_media_info($id)
     }
 }
 
+function get_media_path($id)
+{
+    // Check media exists
+    if(!media_exists($id))
+        return -1;
+
+    // Return results
+    $query = "select * from Media where Media.mediaID='$id'";
+    $result = mysql_query( $query );
+    if (!$result) {
+        die ("get_media_path() failed. Could not query the database: <br />".mysql_error());
+    }
+    else {
+        return mysql_fetch_assoc($result)['path'];
+    }
+}
+
 function get_most_viewed()
 {
     // Return results

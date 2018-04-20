@@ -43,13 +43,16 @@ if(isset($_GET['id'])) {
     
     increment_views($id);
     update_media_timestamp($id);
+    if($user == $_SESSION['username'])
+        $is_mine = True;
+    else
+        $is_mine = False;
 ?>
 
     <h1 class="text-center"> <?php echo $name;?></h1>
     <h5 class="text-center"> Uploaded by: 
         <a class="" href="./profile.php?username=<?php echo $user;?>"><?php echo $user;?></a>
     </h5>
-
     <div class="row">
 <?php
     if($is_image) //view image
@@ -78,6 +81,9 @@ else
         <a class="text-center" href="<?php echo $filepath;?>" target="_blank" download >Download</a>
         <a class="" href="./like.php?id=<?php echo $id;?>">Likes</a>: <?php echo $likes;?>
         </p>
+    </div>
+    <div class="row">
+        <a class="mx-auto btn btn-danger text-center" href="./delete_media.php?id=<?php echo $id;?>">DELETE</a>
     </div>
     <div class="row">
         <a class="mx-auto text-center" href="./add_playlist.php?id=<?php echo $id;?>"> ADD TO PLAYLIST </a>

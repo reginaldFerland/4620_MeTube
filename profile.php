@@ -40,11 +40,9 @@ $profile_pic = $user_info["mediaID"];
 if($profile_pic == NULL)
     $profile_pic = 1;
 
+
 #Profile Picture
-$profile_info = get_media_info($profile_pic);
-$profile_url = $profile_info["path"];
-
-
+$profile_url = get_media_path($profile_pic);
 ?>
 
 <html>
